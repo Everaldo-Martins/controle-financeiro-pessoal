@@ -3,19 +3,35 @@ const descItem = document.querySelector("#desc");
 const amount = document.querySelector("#amount");
 const type = document.querySelector("#type");
 const btnNew = document.querySelector("#btnNew");
+const addItem = document.querySelector('.addItem');
 
 const incomes = document.querySelector(".incomes");
 const expenses = document.querySelector(".expenses");
 const total = document.querySelector(".total");
 const major = document.querySelector(".major");
 
+let editDesc = document.getElementById("editDesc");
+let editAmount = document.getElementById("editAmount");
+let editType = document.getElementById("editType");
+
 const toast = document.querySelector('.toast');
 
 let items;
 let editIndex;
 
-btnNew.onclick = () => {
+const modalNewItem = () => {
+  document.querySelector('.bg-newItem').classList.toggle('visible');
+}
 
+addItem.addEventListener('click', () => {
+  modalNewItem();
+});
+
+document.querySelector(".closeAdd").onclick = function() {
+  modalNewItem();
+};
+
+btnNew.onclick = () => {
   if (descItem.value === "" || amount.value === "" || type.value === "") {
     return newToast('error', 'Preencha todos os campos.')
   }
@@ -33,11 +49,12 @@ btnNew.onclick = () => {
   loadItens();
 
   descItem.value = "";
-  amount.value = "";
+  amount.value = "";  
 
-  if(amount > maxValue) maxValue = amount;
-
-  if (items.length > initialLength) {
+  if (items.length > initialLength) {   
+    setTimeout(() => {
+      modalNewItem();
+    }, 1000);
     newToast('success', 'Item adicionado com sucesso.');
   }
 };
@@ -67,21 +84,17 @@ function editItem(index) {
 
   const item = items[index];
   
-  document.getElementById("editDesc").value = item.desc;
-  document.getElementById("editAmount").value = item.amount;
-  document.getElementById("editType").value = item.type;
+  editDesc.value = item.desc;
+  editAmount.value = item.amount;
+  editType.value = item.type;
 
   document.querySelector(".edit-modal").classList.toggle('visible');
 }
 
 function saveEdit() { 
-  const newDesc = document.getElementById("editDesc").value;
-  const newAmount = document.getElementById("editAmount").value;
-  const newType = document.getElementById("editType").value;
-
-  items[editIndex].desc = newDesc;
-  items[editIndex].amount = Number(newAmount);
-  items[editIndex].type = newType;
+  items[editIndex].desc = editDesc.value;
+  items[editIndex].amount = Number(editAmount.value);
+  items[editIndex].type = editType.value;
   
   const sts = setItensBD();
   loadItens();

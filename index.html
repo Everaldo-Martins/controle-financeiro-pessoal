@@ -8,7 +8,10 @@
 </head>
 <body>
   <header>
-    <a href="#" class="logo"></a>
+    <span class="logo"></span>
+    <span class="addItem">
+      <i class="fa-solid fa-file-circle-plus"></i>
+    </span>
   </header>
   <main>
     <div class="resume">
@@ -41,22 +44,32 @@
         </div>
       </div>
     </div>
-    <div class="newItem">
-      <div class="divDesc">
-        <input type="text" id="desc" placeholder="Descrição" />
+
+    <div class="bg-newItem">
+      <div class="newItem">
+        <div class="newItem-content">
+          <h3>Adicionar Novo Item</h3>
+          <span class="closeAdd">
+            <i class="fa-regular fa-circle-xmark"></i>
+          </span>
+        </div>
+        <div class="divDesc">
+          <input type="text" id="desc" placeholder="Descrição" />
+        </div>
+        <div class="divAmount">
+          <input type="number" id="amount" placeholder="Valor" />
+        </div>
+        <div class="divType">
+          <select id="type">
+            <option value="">Tipo</option>
+            <option value="entrada">Entrada</option>
+            <option value="saida">Saída</option>
+          </select>
+        </div>
+        <button id="btnNew" class="submit">Incluir</button>
       </div>
-      <div class="divAmount">
-        <input type="number" id="amount" placeholder="Valor" />
-      </div>
-      <div class="divType">
-        <select id="type">
-          <option value="">Tipo</option>
-          <option value="entrada">Entrada</option>
-          <option value="saida">Saída</option>
-        </select>
-      </div>
-      <button id="btnNew" class="submit">Incluir</button>
-    </div>
+    </div>   
+
     <div class="divTable">
       <table>
         <thead>

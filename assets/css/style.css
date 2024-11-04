@@ -101,7 +101,7 @@ select:focus,
 select:visited,
 select:active {
     background-color: #f4f7fc;
-    width: 200px;
+    min-width: 200px;
     padding: 14px;
     font-weight: 400;
     font-style: normal;
@@ -111,22 +111,6 @@ select:active {
     border-radius: 8px;
     color: #323232;
     outline: none;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-    border: none;
-    border-radius: 10px;    
-    outline: none;
-
-    -webkit-box-sizing: unset;
-    -webkit-text-fill-color: #f4f7fc !important;
-    -webkit-box-shadow: 0 0 0px 1000px #424242 inset !important;
-    transition: background-color 5000s ease-in-out 0s;
 }
 
 input::placeholder {
@@ -176,6 +160,19 @@ header .logo {
   background-size: contain;
 }
 
+header .addItem {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .addItem i{
+  color: #f4f7fc;
+  font-size: 1.5rem;
+}
+
 main {
   flex: 1;
   width: 100%;
@@ -223,20 +220,60 @@ main .resume .resume-container .major {
   text-align: left;
 }
 
-main .newItem {
-  width: 100%;
-  padding: 20px;
-  display: flex;  
+main .bg-newItem {
+  background-color: #32323299;
+  backdrop-filter: blur(1rem);
+  display: none;
+  align-items: center;
   justify-content: center;
-  align-items: end;
-  flex-wrap: wrap;
-  gap: 10px;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 990;
+}
+
+main .bg-newItem.visible {
+  display: flex;
+}
+
+main .newItem {
+  background-color: #f4f7fc;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 10px;  
 }
 
 main .divDesc, .divType, .divAmount {
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+main .newItem .submit {
+  width: 100%;
+}
+
+main .newItem .newItem-content{
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+main .newItem .closeAdd {
+  font-size: 1rem;
+  color: #D83121;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 
 main .divTable {
@@ -312,6 +349,8 @@ main .columnType {
 }
 
 main .edit-modal {
+  background-color: #32323299;
+  backdrop-filter: blur(1rem);
   display: none;
   align-items: center;
   justify-content: center;
@@ -320,8 +359,7 @@ main .edit-modal {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #32323299;
-  backdrop-filter: blur(1rem);
+  z-index: 990;
 }
 
 main .edit-modal.visible{
@@ -375,7 +413,7 @@ main .toast {
   position: fixed;
   top: 0.5rem;
   right: 0.5rem;
-  z-index: 9;
+  z-index: 999;
   opacity: 0;
   visibility: hidden;
   display: none;
@@ -433,18 +471,18 @@ footer span {
   font-size: 1rem;
 }
 
-/* Responsividade para telas pequenas (smartphones, até 600px) */
-@media (max-width: 600px) {
-  /* Ajusta o padding e o layout do header */
-  header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-    gap: 5px;
+@media (max-width: 600px) { 
+  main .resume {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
-  /* Ajusta os contêineres no main para se empilharem */
-  main .resume,
+  main .resume > .resume-container {
+    width: calc(50% - 10px);
+  }
+
   main .newItem,
   main .divTable {
     flex-direction: column;
@@ -458,12 +496,6 @@ footer span {
   main .columnAction {
     width: auto;
     text-align: center;
-  }
-
-  main .resume > .resume-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
   }
 
   /* Ajuste para o modal de edição */
@@ -526,13 +558,7 @@ footer span {
 }
 
 /* Ajustes para telas muito pequenas (até 400px) */
-@media (max-width: 400px) {
-  /* Ajusta os elementos do cabeçalho para caberem em uma única coluna */
-  header {
-    padding: 5px;
-  }
-
-  /* Ajusta o botão de submit */
+@media (max-width: 400px) { 
   button.submit {
     padding: 10px 15px;
     font-size: 0.9rem;
