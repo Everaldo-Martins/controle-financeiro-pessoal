@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistam Financeiro {Javascript}</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="#" class="logo"></a>
+  </header>
+  <main>
+    <div class="resume">
+      <div class="resume-container">
+        <i class="fa-solid fa-circle-up"></i>
+        <div>
+            <span>Entadas: R$</span>
+            <h3 class="incomes">0.00</h3>
+        </div>
+      </div>
+      <div class="resume-container">
+        <i class="fa-solid fa-circle-down"></i>
+        <div>
+            <span>Saídas: R$</span>
+            <h3 class="expenses">0.00</h3>
+        </div>
+      </div>
+      <div class="resume-container">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+        <div>
+            <span>Saldo: R$</span>
+            <h3 class="total">0.00</h3>
+        </div>
+      </div>
+      <div class="resume-container">
+        <i class="fa-solid fa-sack-dollar"></i>
+        <div>
+            <span>Principal: R$</span>
+            <h3 class="major">0.00</h3>
+        </div>
+      </div>
+    </div>
+    <div class="newItem">
+      <div class="divDesc">
+        <input type="text" id="desc" placeholder="Descrição" />
+      </div>
+      <div class="divAmount">
+        <input type="number" id="amount" placeholder="Valor" />
+      </div>
+      <div class="divType">
+        <select id="type">
+          <option value="">Tipo</option>
+          <option value="entrada">Entrada</option>
+          <option value="saida">Saída</option>
+        </select>
+      </div>
+      <button id="btnNew" class="submit">Incluir</button>
+    </div>
+    <div class="divTable">
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th class="columnAmount">Valor</th>
+            <th class="columnType">Tipo</th>
+            <th colspan="2" class="columnAction"></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="edit-modal">
+        <div class="edit-modal-container">
+          <div class="edit-modal-content">
+            <span id="closeModal" class="close">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </span>
+            <h2>Editar Item</h2>
+          </div>
+          
+          <div class="edit-modal-content">
+            <label for="editDesc">Descrição:</label>
+            <input type="text" id="editDesc" />
+          </div>
+      
+          <div class="edit-modal-content">
+            <label for="editAmount">Valor:</label>
+            <input type="number" id="editAmount" />
+          </div>
+      
+          <div class="edit-modal-content">
+            <label for="editType">Tipo:</label>
+            <select id="editType">
+              <option value="entrada">Entrada</option>
+              <option value="saida">Saída</option>
+            </select>
+          </div>
+      
+          <button class="submit" onclick="saveEdit()">Salvar</button>
+        </div>
+      </div>
+      <div class="toast"></div>
+  </main>  
+  <footer>
+    <span class="copy"></span>
+  </footer>  
+  <script src="./assets/js/script.js"></script>
+</body>
+</html>
