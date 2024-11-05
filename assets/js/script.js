@@ -161,8 +161,8 @@ function getTotals() {
   const incomesMaxValue = Math.max(
     ...items
       .filter((item) => item.type === "entrada")
-      .map((transaction) => Number(transaction.amount))
-  );
+      .map((transaction) => Number(transaction.amount)), 0
+  ).toFixed(2);
 
   incomes.innerHTML = totalIncomes;
   expenses.innerHTML = totalExpenses;
@@ -188,26 +188,34 @@ const setItensBD = () => {
 loadItens();
 
 function newToast(sts, message) {
-  let toast = document.querySelector('.toast');
+  let main = document.querySelector('main');
+  
+  let existingToast = main.querySelector('.toast');
+  if (existingToast) existingToast.remove();
+
+  let toast = document.createElement('div');
   let fa = document.createElement('span');
   let msg = document.createElement('span');
 
+  toast.classList.add('toast');
   fa.classList.add('fa-solid');
   msg.classList.add('msg');
 
   fa.classList.add(sts === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation');
   msg.innerText = message;
 
+  main.appendChild(toast);
   toast.appendChild(fa);
   toast.appendChild(msg);
 
   setTimeout(() => {
     toast.classList.add(sts);
-    setInterval(() => {
+    setTimeout(() => {
       toast.classList.remove(sts);
-      toast.innerHTML = '';
-    }, 1000 * 10);    
+      toast.remove();
+    }, 10000);
   }, 300);
 }
+
 
 document.querySelector('.copy').innerHTML = `&#9400; CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;

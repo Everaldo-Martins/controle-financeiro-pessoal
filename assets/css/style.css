@@ -404,11 +404,10 @@ main .close {
 }
 
 main .toast {
-  background-color: #f4f7fc;
-  border: 1px solid #323232;
-  width: max-content;
-  height: fit-content;
+  background-color: #f4f7fc;  
+  width: fit-content;
   padding: 20px 20px 15px;
+  border: 1px solid #323232;
   border-radius: 10px;
   position: fixed;
   top: 0.5rem;
@@ -511,8 +510,7 @@ footer span {
 
   /* Ajusta o tamanho do toast para telas menores */
   main .toast {
-    width: 90%;
-    right: auto;
+    width: fit-content;
     left: 50%;
     transform: translateX(-50%);
   }
