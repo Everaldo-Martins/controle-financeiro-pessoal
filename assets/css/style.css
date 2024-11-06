@@ -221,8 +221,8 @@ main .resume .resume-container .major {
 }
 
 main .bg-newItem {
-  background-color: #32323299;
-  backdrop-filter: blur(1rem);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.5rem);   
   display: none;
   align-items: center;
   justify-content: center;
@@ -240,8 +240,10 @@ main .bg-newItem.visible {
 
 main .newItem {
   background-color: #f4f7fc;
+  box-shadow: 0 0 8px #32323299;
   width: 100%;
   max-width: 400px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -349,8 +351,8 @@ main .columnType {
 }
 
 main .edit-modal {
-  background-color: #32323299;
-  backdrop-filter: blur(1rem);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.5rem);
   display: none;
   align-items: center;
   justify-content: center;
@@ -368,6 +370,7 @@ main .edit-modal.visible{
 
 main .edit-modal-container {
   background-color: #f4f7fc;
+  box-shadow: 0 0 8px #32323299;
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -408,6 +411,7 @@ main .toast {
   width: fit-content;
   padding: 20px 20px 15px;
   border: 1px solid #323232;
+  box-shadow: 0 0 8px #32323299; 
   border-radius: 10px;
   position: fixed;
   top: 0.5rem;
@@ -455,6 +459,60 @@ main .toast.error .fa-solid {
   color: #D83121;
 }
 
+main .deleteModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.5rem);
+  justify-content: center;
+  align-items: center;
+}
+
+main .deleteModal.active {
+  display: flex;
+}
+
+main .deleteModal .modal-content {
+  background-color: #f4f7fc;
+  box-shadow: 0 0 8px #32323299; 
+  padding: 20px;     
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+main .deleteModal .modal-content p {
+  padding: 0 20px 10px;
+}
+
+main .deleteModal .modal-content span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main .deleteModal .modal-content .cancelDelete,
+main .deleteModal .modal-content .confirmDelete {
+  background-color: #323232;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+main .deleteModal .modal-content .confirmDelete {
+  background-color: red;
+  font-weight: 600;
+}
+
 footer {
   width: 100%;
   height: 40px;
@@ -484,6 +542,7 @@ footer span {
 
   main .newItem,
   main .divTable {
+    max-width: 95%;
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -511,8 +570,8 @@ footer span {
   /* Ajusta o tamanho do toast para telas menores */
   main .toast {
     width: fit-content;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
+    top: 0;
   }
 
   footer span {

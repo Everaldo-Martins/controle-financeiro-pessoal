@@ -14,10 +14,34 @@ let editDesc = document.getElementById("editDesc");
 let editAmount = document.getElementById("editAmount");
 let editType = document.getElementById("editType");
 
-const toast = document.querySelector('.toast');
-
 let items;
 let editIndex;
+
+let itemIndexToDelete = null;
+
+const deleteModal = document.querySelector('.deleteModal');
+function deleteItem(index) {
+  itemIndexToDelete = index;
+  deleteModal.classList.toggle('active');
+}
+
+document.querySelector('.confirmDelete').addEventListener('click', function () {
+  if (itemIndexToDelete !== null) {
+    items.splice(itemIndexToDelete, 1);
+
+    const sts = setItensBD();
+    loadItens();
+
+    newToast(sts ? 'success' : 'error', sts ? 'Item removido com sucesso.' : 'Erro ao remover o item.');
+    itemIndexToDelete = null;
+  }
+  deleteModal.classList.toggle('active');
+});
+
+document.querySelector('.cancelDelete').addEventListener('click', function () {
+  itemIndexToDelete = null;
+  deleteModal.classList.toggle('active');
+});
 
 const modalNewItem = () => {
   document.querySelector('.bg-newItem').classList.toggle('visible');
@@ -27,7 +51,7 @@ addItem.addEventListener('click', () => {
   modalNewItem();
 });
 
-document.querySelector(".closeAdd").onclick = function() {
+document.querySelector(".closeAdd").onclick = function () {
   modalNewItem();
 };
 
@@ -49,9 +73,9 @@ btnNew.onclick = () => {
   loadItens();
 
   descItem.value = "";
-  amount.value = "";  
+  amount.value = "";
 
-  if (items.length > initialLength) {   
+  if (items.length > initialLength) {
     setTimeout(() => {
       modalNewItem();
     }, 1000);
@@ -59,21 +83,14 @@ btnNew.onclick = () => {
   }
 };
 
-function deleteItem(index) {
-  items.splice(index, 1);
 
-  const sts = setItensBD();
 
-  loadItens();
 
-  newToast(sts ? 'success' : 'error', sts ? 'Item removido com sucesso.' : 'Erro ao remover o item.');
-}
-
-document.getElementById("closeModal").onclick = function() {
+document.getElementById("closeModal").onclick = function () {
   document.querySelector(".edit-modal").classList.toggle('visible');
 };
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target.classList.contains("edit-modal")) {
     document.querySelector(".edit-modal").classList.toggle('visible');
   }
@@ -83,7 +100,7 @@ function editItem(index) {
   editIndex = index;
 
   const item = items[index];
-  
+
   editDesc.value = item.desc;
   editAmount.value = item.amount;
   editType.value = item.type;
@@ -91,11 +108,11 @@ function editItem(index) {
   document.querySelector(".edit-modal").classList.toggle('visible');
 }
 
-function saveEdit() { 
+function saveEdit() {
   items[editIndex].desc = editDesc.value;
   items[editIndex].amount = Number(editAmount.value);
   items[editIndex].type = editType.value;
-  
+
   const sts = setItensBD();
   loadItens();
 
@@ -177,7 +194,7 @@ const setItensBD = () => {
   try {
     localStorage.setItem("db_items", JSON.stringify(items));
     return true;
-  } 
+  }
   catch (error) {
     console.error("Erro ao salvar no localStorage:", error);
     return false;
@@ -189,7 +206,7 @@ loadItens();
 
 function newToast(sts, message) {
   let main = document.querySelector('main');
-  
+
   let existingToast = main.querySelector('.toast');
   if (existingToast) existingToast.remove();
 
