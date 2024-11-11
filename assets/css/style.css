@@ -120,27 +120,26 @@ select:hover,
 select:focus,
 select:visited,
 select:active {
-    background-color: #f4f7fc;
+    background-color: #424242;
     min-width: 200px;
-    padding: 14px;
+    padding: 15px;
     font-weight: 400;
     font-style: normal;
     font-size: 1rem;
     border: 1px solid #323232;
-    box-shadow: inset 0 0 4px #32323233;
-    border-radius: 8px;
-    color: #323232;
+    box-shadow: inset 0 0 4px #f4f7fc33;
+    border-radius: 10px;
+    color: #f4f7fc;
     outline: none;
 }
 
 input::placeholder {
-  color: #323232;
+  color: #f4f7fc;
 }
 
 button.submit {
   background-color: rgb(1, 176, 209);
   color: #f4f7fc;
-  border: 1px solid rgb(107,84,162);
   padding: 15px 20px;
   border-radius: 10px;
   font-size: 1rem;
@@ -149,7 +148,7 @@ button.submit {
 }
 
 body {
-  background-color: #f4f7fc;
+  background-color: #424242;
   color: #323232;
   display: flex;
   flex-direction: column;
@@ -159,8 +158,7 @@ body {
 }
 
 header {
-  background: rgb(107,84,162);
-  background: linear-gradient(90deg, rgba(107,84,162,1) 0%, rgba(1,176,209,1) 100%);  
+  background-color: #f5ac2a; 
   width: 100%;
   height: 50px;
   padding: 20px;
@@ -174,40 +172,62 @@ header {
 header .logo {
   width: 40px;
   height: 40px;
+  color: #323232;
   background-image: url('../img/logo.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 
-header .add-item {
-  width: 40px;
+header nav {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+header .add-item,
+header .about,
+header .contact {
+  background-color: #323232;
+  width: fit-content;
+  padding: 0 10px;  
   height: 40px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #f4f7fc;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
   cursor: pointer;
 }
 
-header .add-item i{
+header .add-item i,
+header .about i,
+header .contact i {
   color: #f4f7fc;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 main {
   flex: 1;
   width: 100%;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  gap: 10px;
   position: relative;
   z-index: 1;
+  overflow-y: auto;
 }
 
 main .resume { 
-  width: 100%;   
-  padding: 20px 20px 0;
+  width: 100%; 
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -216,15 +236,16 @@ main .resume {
 
 main .resume > .resume-container {
   min-width: 200px;
-  padding: 30px 20px;
-  background-color: #f4f7fc;
+  padding: 20px;
+  background-color: #323232;
+  color: #f4f7fc;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
   border-radius: 10px;  
-  box-shadow: 0 0 5px #32323299;  
+  box-shadow: 0 0 5px #f4f7fc33;  
 }
 
 main .resume .resume-container i{
@@ -236,6 +257,7 @@ main .resume .resume-container .expenses,
 main .resume .resume-container .total,
 main .resume .resume-container .major {
   width: fit-content;
+  color: #f4f7fc;
   font-size: 1.8rem;
   font-weight: 700;
   text-align: left;
@@ -243,7 +265,6 @@ main .resume .resume-container .major {
 
 main .container-table {
   width: 100%;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -251,15 +272,17 @@ main .container-table {
 
 main table {
   width: 100%;
+  color: #f4f7fc;
   padding: 20px 0;
   border-radius: 5px;
   border-collapse: collapse;
 }
 
 main th {
+  padding: 5px;
   text-align: start;
   border-bottom: inset;
-  padding-bottom: 5px;
+  border-color: #f5ac2a;
 }
 
 main tbody tr td {
@@ -271,7 +294,7 @@ main tbody tr td i {
 }
 
 main tbody tr:nth-child(odd) {
-  background: #e1e1e1;
+  background: #323232;
 }
 
 main .columnAction {
@@ -279,10 +302,15 @@ main .columnAction {
   text-align: center;
 }
 
-main .columnAction > button {
+main .columnAction > button {  
   background: transparent;
-  border: none;
+  color: #f4f7fc;
+  border: none;  
   cursor: pointer;
+}
+
+main .columnAction button > i {
+  color: #f4f7fc;
 }
 
 main .columnAmount {
@@ -295,8 +323,8 @@ main .columnType {
 }
 
 main .add-modal {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(0.5rem);   
+  background-color: rgba(50, 50, 50, 0.2);
+  backdrop-filter: blur(0.8rem);   
   display: none;
   align-items: center;
   justify-content: center;
@@ -313,8 +341,9 @@ main .add-modal.visible {
 }
 
 main .add-modal-container {
-  background-color: #f4f7fc;
-  box-shadow: 0 0 8px #32323299;
+  background-color: #323232;
+  color: #f4f7fc;
+  box-shadow: 0 0 8px #f4f7fc33;
   width: 100%;
   max-width: 400px;
   height: fit-content;
@@ -335,6 +364,10 @@ main .add-modal-container .amount {
   flex-direction: column;
 }
 
+main .add-modal-container h3 {
+  padding: 10px;
+}
+
 main .add-modal-container .submit {
   width: 100%;
 }
@@ -346,7 +379,7 @@ main .add-modal-container .add-modal-content{
 }
 
 main .add-modal-container .close {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #D83121;
   position: absolute;
   top: 0;
@@ -355,8 +388,8 @@ main .add-modal-container .close {
 }
 
 main .edit-modal {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(0.5rem);
+  background-color: rgba(50, 50, 50, 0.2);
+  backdrop-filter: blur(0.8rem);
   display: none;
   align-items: center;
   justify-content: center;
@@ -373,8 +406,9 @@ main .edit-modal.visible{
 }
 
 main .edit-modal-container {
-  background-color: #f4f7fc;
-  box-shadow: 0 0 8px #32323299;
+  background-color: #323232;
+  color: #f4f7fc;
+  box-shadow: 0 0 5px #f4f7fc33;
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -403,7 +437,7 @@ main .edit-modal .edit-modal-content select {
 }
 
 main .close {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #D83121;
   position: absolute;
   top: 0;
@@ -412,11 +446,12 @@ main .close {
 }
 
 main .toast {
-  background-color: #f4f7fc;  
+  background-color: #323232;  
   width: fit-content;
+  height: fit-content;
   padding: 20px 20px 15px;
   border: none;
-  box-shadow: 0 0 8px #32323233; 
+  box-shadow: 0 0 8px #f4f7fc33; 
   border-radius: 10px;
   position: absolute;
   bottom: 0.5rem;
@@ -471,8 +506,8 @@ main .delete-modal {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(0.5rem);
+  background-color: rgba(50, 50, 50, 0.2);
+  backdrop-filter: blur(0.8rem);
   justify-content: center;
   align-items: center;
 }
@@ -482,8 +517,9 @@ main .delete-modal.active {
 }
 
 main .delete-modal .modal-content {
-  background-color: #f4f7fc;
-  box-shadow: 0 0 8px #32323299; 
+  background-color: #424242;
+  color: #f4f7fc;
+  box-shadow: 0 0 8px #f4f7fc33; 
   padding: 20px;     
   border-radius: 10px;
   display: flex;
@@ -508,7 +544,8 @@ main .delete-modal .modal-content span {
 main .delete-modal .modal-content .cancel,
 main .delete-modal .modal-content .confirm {
   background-color: #323232;
-  color: #fff;
+  color: #f4f7fc;
+  box-shadow: 0 0 8px #f4f7fc33;
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
@@ -535,6 +572,17 @@ footer span {
 }
 
 @media (max-width: 600px) { 
+  header {
+    height: fit-content;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  header .logo {
+    width: 60px;
+    height: 60px;
+  }
+
   main .resume {
     width: 100%;
     flex-direction: row;
@@ -554,7 +602,6 @@ footer span {
     gap: 10px;
   }
 
-  /* Ajusta o tamanho das colunas e botões de ação na tabela */
   main .columnAmount,
   main .columnType,
   main .columnAction {
@@ -562,18 +609,15 @@ footer span {
     text-align: center;
   }
 
-  /* Ajuste para o modal de edição */
   main .edit-modal-container {
     padding: 15px;
   }
 
-  /* Ajusta a largura do botão e dos inputs no modal */
   main .edit-modal .edit-modal-content input,
   main .edit-modal .edit-modal-content select {
     width: 100%;
   }
 
-  /* Ajusta o tamanho do toast para telas menores */
   main .toast {
     width: fit-content;
     right: 0;
@@ -585,15 +629,12 @@ footer span {
   }
 }
 
-/* Responsividade para telas médias (tablets, até 900px) */
 @media (max-width: 900px) {
-  /* Ajusta o tamanho dos contêineres de resumo */
   main .resume > .resume-container {
     min-width: 150px;
     padding: 20px 15px;
   }
 
-  /* Ajusta o tamanho dos ícones e fontes no resumo */
   main .resume .resume-container i {
     font-size: 2rem;
   }
@@ -605,12 +646,10 @@ footer span {
     font-size: 1.6rem;
   }
 
-  /* Ajuste do modal para ser mais compacto */
   main .edit-modal-container {
     max-width: 350px;
   }
 
-  /* Ajuste no tamanho do footer */
   footer {
     padding: 10px;
   }
@@ -620,21 +659,18 @@ footer span {
   }
 }
 
-/* Ajustes para telas muito pequenas (até 400px) */
 @media (max-width: 400px) { 
   button.submit {
     padding: 10px 15px;
     font-size: 0.9rem;
   }
 
-  /* Ajusta o conteúdo do main para caber melhor */
   main .divDesc, 
   main .divType, 
   main .divAmount {
     width: 100%;
   }
 
-  /* Ajuste nos inputs para ocupar a largura completa */
   input, 
   select {
     width: 100%;
