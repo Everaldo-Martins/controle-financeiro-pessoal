@@ -3,7 +3,7 @@ const descItem = document.querySelector("#desc");
 const amount = document.querySelector("#amount");
 const type = document.querySelector("#type");
 const btnNew = document.querySelector("#btnNew");
-const addItem = document.querySelector('.addItem');
+const addItem = document.querySelector('.add-item');
 
 const incomes = document.querySelector(".incomes");
 const expenses = document.querySelector(".expenses");
@@ -16,32 +16,6 @@ let editType = document.getElementById("editType");
 
 let items;
 let editIndex;
-
-let itemIndexToDelete = null;
-
-const deleteModal = document.querySelector('.deleteModal');
-function deleteItem(index) {
-  itemIndexToDelete = index;
-  deleteModal.classList.toggle('active');
-}
-
-document.querySelector('.confirmDelete').addEventListener('click', function () {
-  if (itemIndexToDelete !== null) {
-    items.splice(itemIndexToDelete, 1);
-
-    const sts = setItensBD();
-    loadItens();
-
-    newToast(sts ? 'success' : 'error', sts ? 'Item removido com sucesso.' : 'Erro ao remover o item.');
-    itemIndexToDelete = null;
-  }
-  deleteModal.classList.toggle('active');
-});
-
-document.querySelector('.cancelDelete').addEventListener('click', function () {
-  itemIndexToDelete = null;
-  deleteModal.classList.toggle('active');
-});
 
 const modalNewItem = () => {
   document.querySelector('.add-modal').classList.toggle('visible');
@@ -85,16 +59,6 @@ btnNew.onclick = () => {
 
 document.getElementById("closeModal").onclick = function () {
   document.querySelector(".edit-modal").classList.toggle('visible');
-};
-
-window.onclick = function (event) {
-  if (event.target.classList.contains("edit-modal")) {
-    document.querySelector(".edit-modal").classList.toggle('visible');    
-  }
-
-  if(event.target.classList.contains("bg-newItem")){
-    document.querySelector('.bg-newItem').classList.toggle('visible');
-  }
 };
 
 function editItem(index) {
@@ -202,6 +166,31 @@ const setItensBD = () => {
   }
 };
 
+let itemIndexToDelete = null;
+
+const deleteModal = document.querySelector('.deleteModal');
+function deleteItem(index) {
+  itemIndexToDelete = index;
+  deleteModal.classList.toggle('active');
+}
+
+document.querySelector('.confirmDelete').addEventListener('click', function () {
+  if (itemIndexToDelete !== null) {
+    items.splice(itemIndexToDelete, 1);
+
+    const sts = setItensBD();
+    loadItens();
+
+    newToast(sts ? 'success' : 'error', sts ? 'Item removido com sucesso.' : 'Erro ao remover o item.');
+    itemIndexToDelete = null;
+  }
+  deleteModal.classList.toggle('active');
+});
+
+document.querySelector('.cancelDelete').addEventListener('click', function () {
+  itemIndexToDelete = null;
+  deleteModal.classList.toggle('active');
+});
 
 loadItens();
 
@@ -235,5 +224,14 @@ function newToast(sts, message) {
   }, 300);
 }
 
+window.onclick = function (event) {
+  if (event.target.classList.contains("edit-modal")) {
+    document.querySelector(".edit-modal").classList.toggle('visible');    
+  }
+
+  if(event.target.classList.contains("add-modal")){
+    document.querySelector('.add-modal').classList.toggle('visible');
+  }
+};
 
 document.querySelector('.copy').innerHTML = `&#9400; CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;

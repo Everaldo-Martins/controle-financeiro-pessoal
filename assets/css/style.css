@@ -160,7 +160,7 @@ header .logo {
   background-size: contain;
 }
 
-header .addItem {
+header .add-item {
   width: 40px;
   height: 40px;
   display: flex;
@@ -168,7 +168,7 @@ header .addItem {
   align-items: center;
 }
 
-header .addItem i{
+header .add-item i{
   color: #f4f7fc;
   font-size: 1.5rem;
 }
@@ -220,7 +220,7 @@ main .resume .resume-container .major {
   text-align: left;
 }
 
-main .divTable {
+main .container-table {
   width: 100%;
   padding: 20px;
   display: flex;
@@ -292,8 +292,6 @@ main .columnType {
   text-align: center;
 }
 
-//Add modal
-
 main .add-modal {
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(0.5rem);   
@@ -308,7 +306,7 @@ main .add-modal {
   z-index: 990;
 }
 
-main .visible {
+main .add-modal.visible {
   display: flex;
 }
 
@@ -354,8 +352,6 @@ main .add-modal-container .close {
   cursor: pointer;
 }
 
-//Edit modal
-
 main .edit-modal {
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(0.5rem);
@@ -398,6 +394,7 @@ main .edit-modal .edit-modal-content {
   gap: 5px;
 }
 
+main .edit-modal button,
 main .edit-modal .edit-modal-content input,
 main .edit-modal .edit-modal-content select {
   width: 100%;
@@ -416,11 +413,11 @@ main .toast {
   background-color: #f4f7fc;  
   width: fit-content;
   padding: 20px 20px 15px;
-  border: 1px solid #323232;
-  box-shadow: 0 0 8px #32323299; 
+  border: none;
+  box-shadow: 0 0 8px #32323233; 
   border-radius: 10px;
-  position: fixed;
-  top: 0.5rem;
+  position: absolute;
+  bottom: 0.5rem;
   right: 0.5rem;
   z-index: 999;
   opacity: 0;
