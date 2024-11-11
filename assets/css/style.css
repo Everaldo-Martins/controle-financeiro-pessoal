@@ -220,64 +220,6 @@ main .resume .resume-container .major {
   text-align: left;
 }
 
-main .bg-newItem {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(0.5rem);   
-  display: none;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 990;
-}
-
-main .bg-newItem.visible {
-  display: flex;
-}
-
-main .newItem {
-  background-color: #f4f7fc;
-  box-shadow: 0 0 8px #32323299;
-  width: 100%;
-  max-width: 400px;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  padding: 20px;
-  border-radius: 10px;  
-}
-
-main .divDesc, .divType, .divAmount {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-main .newItem .submit {
-  width: 100%;
-}
-
-main .newItem .newItem-content{
-  width: 100%;
-  position: relative;
-  text-align: center;
-}
-
-main .newItem .closeAdd {
-  font-size: 1rem;
-  color: #D83121;
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-
 main .divTable {
   width: 100%;
   padding: 20px;
@@ -349,6 +291,70 @@ main .columnType {
   width: 80px;
   text-align: center;
 }
+
+//Add modal
+
+main .add-modal {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.5rem);   
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 990;
+}
+
+main .visible {
+  display: flex;
+}
+
+main .add-modal-container {
+  background-color: #f4f7fc;
+  box-shadow: 0 0 8px #32323299;
+  width: 100%;
+  max-width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 10px;  
+}
+
+main .add-modal-container .desc, 
+main .add-modal-container .type, 
+main .add-modal-container .amount {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main .add-modal-container .submit {
+  width: 100%;
+}
+
+main .add-modal-container .add-modal-content{
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+main .add-modal-container .close {
+  font-size: 1rem;
+  color: #D83121;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+//Edit modal
 
 main .edit-modal {
   background-color: rgba(255, 255, 255, 0.1);
@@ -540,7 +546,7 @@ footer span {
     width: calc(50% - 10px);
   }
 
-  main .newItem,
+  main .add-modal-container,
   main .divTable {
     max-width: 95%;
     flex-direction: column;

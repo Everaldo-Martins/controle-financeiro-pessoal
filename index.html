@@ -43,32 +43,7 @@
             <h3 class="major">0.00</h3>
         </div>
       </div>
-    </div>
-
-    <div class="bg-newItem">
-      <div class="newItem">
-        <div class="newItem-content">
-          <h3>Adicionar Novo Item</h3>
-          <span class="closeAdd">
-            <i class="fa-regular fa-circle-xmark"></i>
-          </span>
-        </div>
-        <div class="divDesc">
-          <input type="text" id="desc" placeholder="Descrição" />
-        </div>
-        <div class="divAmount">
-          <input type="number" id="amount" placeholder="Valor" />
-        </div>
-        <div class="divType">
-          <select id="type">
-            <option value="">Tipo</option>
-            <option value="entrada">Entrada</option>
-            <option value="saida">Saída</option>
-          </select>
-        </div>
-        <button id="btnNew" class="submit">Incluir</button>
-      </div>
-    </div>   
+    </div>    
 
     <div class="divTable">
       <table>
@@ -83,6 +58,32 @@
         <tbody>
         </tbody>
       </table>
+      
+      <div class="add-modal">
+        <div class="add-modal-container">
+          <div class="add-modal-content">
+            <h3>Adicionar Novo Item</h3>
+            <span class="close">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </span>
+          </div>
+          <div class="desc">
+            <input type="text" id="desc" placeholder="Descrição" />
+          </div>
+          <div class="amount">
+            <input type="number" id="amount" placeholder="Valor" />
+          </div>
+          <div class="type">
+            <select id="type">
+              <option value="">Tipo</option>
+              <option value="entrada">Entrada</option>
+              <option value="saida">Saída</option>
+            </select>
+          </div>
+          <button id="btnNew" class="submit">Incluir</button>
+        </div>
+      </div> 
+
       <div class="edit-modal">
         <div class="edit-modal-container">
           <div class="edit-modal-content">

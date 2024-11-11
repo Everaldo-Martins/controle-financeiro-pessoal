@@ -44,14 +44,14 @@ document.querySelector('.cancelDelete').addEventListener('click', function () {
 });
 
 const modalNewItem = () => {
-  document.querySelector('.bg-newItem').classList.toggle('visible');
+  document.querySelector('.add-modal').classList.toggle('visible');
 }
 
 addItem.addEventListener('click', () => {
   modalNewItem();
 });
 
-document.querySelector(".closeAdd").onclick = function () {
+document.querySelector(".close").onclick = function () {
   modalNewItem();
 };
 
@@ -83,16 +83,17 @@ btnNew.onclick = () => {
   }
 };
 
-
-
-
 document.getElementById("closeModal").onclick = function () {
   document.querySelector(".edit-modal").classList.toggle('visible');
 };
 
 window.onclick = function (event) {
   if (event.target.classList.contains("edit-modal")) {
-    document.querySelector(".edit-modal").classList.toggle('visible');
+    document.querySelector(".edit-modal").classList.toggle('visible');    
+  }
+
+  if(event.target.classList.contains("bg-newItem")){
+    document.querySelector('.bg-newItem').classList.toggle('visible');
   }
 };
 
