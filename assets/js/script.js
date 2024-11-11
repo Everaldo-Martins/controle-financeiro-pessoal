@@ -93,11 +93,11 @@ function insertItem(item, index) {
     <td>${item.desc}</td>
     <td>R$ ${item.amount}</td>
     <td class="columnType">${item.type === "entrada"
-      ? '<i class="fa-solid fa-circle-up"></i>'
-      : '<i class="fa-solid fa-circle-down"></i>'
+      ? '<i class="fa-solid fa-circle-up" title="Entadas"></i>'
+      : '<i class="fa-solid fa-circle-down" title="Saídas"></i>'
     }</td>
     <td class="columnAction">
-      <button onclick="editItem(${index})">
+      <button onclick="editItem(${index})"
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
     </td>
@@ -168,13 +168,13 @@ const setItensBD = () => {
 
 let itemIndexToDelete = null;
 
-const deleteModal = document.querySelector('.deleteModal');
+const deleteModal = document.querySelector('.delete-modal');
 function deleteItem(index) {
   itemIndexToDelete = index;
   deleteModal.classList.toggle('active');
 }
 
-document.querySelector('.confirmDelete').addEventListener('click', function () {
+document.querySelector('.confirm').addEventListener('click', function () {
   if (itemIndexToDelete !== null) {
     items.splice(itemIndexToDelete, 1);
 
@@ -187,7 +187,7 @@ document.querySelector('.confirmDelete').addEventListener('click', function () {
   deleteModal.classList.toggle('active');
 });
 
-document.querySelector('.cancelDelete').addEventListener('click', function () {
+document.querySelector('.cancel').addEventListener('click', function () {
   itemIndexToDelete = null;
   deleteModal.classList.toggle('active');
 });

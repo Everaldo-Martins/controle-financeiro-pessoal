@@ -90,6 +90,26 @@ html {
     padding: 0;
 }
 
+.fa-circle-up {
+  color: #00C9A7;
+}
+
+.fa-circle-down {
+  color: #D83121;
+}
+
+.fa-trash-can {
+  color: #323232;
+}
+
+.fa-hand-holding-dollar {
+  color: #00C9A7;
+}
+
+.fa-sack-dollar {
+  color: #f5ac2a;
+}
+
 input,
 input:hover,
 input:focus,
@@ -166,6 +186,7 @@ header .add-item {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 header .add-item i{
@@ -246,31 +267,11 @@ main tbody tr td {
 }
 
 main tbody tr td i {
-  font-size: 1rem;
+  font-size: 1rem;  
 }
 
 main tbody tr:nth-child(odd) {
   background: #e1e1e1;
-}
-
-main .fa-circle-up {
-  color: #00C9A7;
-}
-
-main .fa-circle-down {
-  color: #D83121;
-}
-
-main .fa-trash-can {
-  color: #323232;
-}
-
-main .fa-hand-holding-dollar {
-  color: #00C9A7;
-}
-
-main .fa-sack-dollar {
-  color: #f5ac2a;
 }
 
 main .columnAction {
@@ -281,6 +282,7 @@ main .columnAction {
 main .columnAction > button {
   background: transparent;
   border: none;
+  cursor: pointer;
 }
 
 main .columnAmount {
@@ -462,7 +464,7 @@ main .toast.error .fa-solid {
   color: #D83121;
 }
 
-main .deleteModal {
+main .delete-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -475,11 +477,11 @@ main .deleteModal {
   align-items: center;
 }
 
-main .deleteModal.active {
+main .delete-modal.active {
   display: flex;
 }
 
-main .deleteModal .modal-content {
+main .delete-modal .modal-content {
   background-color: #f4f7fc;
   box-shadow: 0 0 8px #32323299; 
   padding: 20px;     
@@ -491,19 +493,20 @@ main .deleteModal .modal-content {
   gap: 10px;
 }
 
-main .deleteModal .modal-content p {
+main .delete-modal .modal-content p {
   padding: 0 20px 10px;
+  font-weight: 500;
 }
 
-main .deleteModal .modal-content span {
+main .delete-modal .modal-content span {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-main .deleteModal .modal-content .cancelDelete,
-main .deleteModal .modal-content .confirmDelete {
+main .delete-modal .modal-content .cancel,
+main .delete-modal .modal-content .confirm {
   background-color: #323232;
   color: #fff;
   border: none;
@@ -511,7 +514,7 @@ main .deleteModal .modal-content .confirmDelete {
   padding: 10px 15px;
 }
 
-main .deleteModal .modal-content .confirmDelete {
+main .delete-modal .modal-content .confirm {
   background-color: red;
   font-weight: 600;
 }
