@@ -74,9 +74,7 @@
         <div class="add-modal-container">
           <div class="add-modal-content">
             <h3>Adicionar Novo Item</h3>
-            <span class="close">
-              <i class="fa-solid fa-circle-xmark"></i>
-            </span>
+            <i class="close fa-solid fa-circle-xmark"></i>
           </div>
 
           <div class="desc">
@@ -95,16 +93,17 @@
             </select>
           </div>
 
-          <button id="btnNew" class="submit">Incluir</button>
+          <button id="btnNew" class="submit">
+            <i class="fa-solid fa-circle-check"></i>
+            Incluir
+          </button>
         </div>
       </div> 
 
       <div class="edit-modal">
         <div class="edit-modal-container">
           <div class="edit-modal-content">
-            <span id="closeModal" class="close">
-              <i class="fa-solid fa-circle-xmark"></i>
-            </span>
+            <i id="closeModal" class="fa-solid fa-circle-xmark"></i>            
             <h3>Editar Item</h3>
           </div>
           
@@ -126,7 +125,10 @@
             </select>
           </div>
       
-          <button class="submit" onclick="saveEdit()">Salvar</button>
+          <button class="submit" onclick="saveEdit()">
+            <i class="fa-solid fa-circle-check"></i>
+            Salvar
+          </button>
         </div>
       </div>
       
@@ -134,8 +136,14 @@
         <div class="modal-content">
           <p>Quer realmente deletar esse item?</p>
           <span>
-            <button class="confirm">Delete</button>
-            <button class="cancel">Cancelar</button>
+            <button class="confirm">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              Delete
+            </button>
+            <button class="cancel">
+              <i class="fa-solid fa-circle-xmark"></i>
+              Cancelar
+            </button>
           </span>
         </div>
       </div>
