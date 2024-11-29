@@ -31,15 +31,16 @@ document.querySelector(".close").onclick = function () {
 
 btnNew.onclick = () => {
   if (descItem.value === "" || amount.value === "" || type.value === "") {
-    return newToast('error', 'Preencha todos os campos.')
+    return newToast('error', 'Preencha todos os campos.');
   }
 
   const initialLength = items.length;
 
   items.push({
+    pago: false,
     desc: descItem.value,
     amount: Math.abs(amount.value).toFixed(2),
-    type: type.value,
+    type: type.value,    
   });
 
   setItensBD();
@@ -65,18 +66,23 @@ function editItem(index) {
   editIndex = index;
 
   const item = items[index];
+  const typeEntrace = document.querySelector(".edit-modal-content-switch");
 
   editDesc.value = item.desc;
   editAmount.value = item.amount;
   editType.value = item.type;
+  document.getElementById("editPago").checked = item.pago ?? false;
+
+  item.type === "entrada" ? typeEntrace.classList.add("hidden") : typeEntrace.classList.remove("hidden");
 
   document.querySelector(".edit-modal").classList.toggle('visible');
 }
 
 function saveEdit() {
+  items[editIndex].pago = document.getElementById("editPago").checked;
   items[editIndex].desc = editDesc.value;
   items[editIndex].amount = Number(editAmount.value);
-  items[editIndex].type = editType.value;
+  items[editIndex].type = editType.value;  
 
   const sts = setItensBD();
   loadItens();
@@ -89,26 +95,28 @@ function insertItem(item, index) {
   items = getItensBD();
   let tr = document.createElement("tr");
 
+  const formattedAmount = Number(item.amount).toFixed(2);
+
   tr.innerHTML = `
-    <td class="columnType">
-    ${item.type === "entrada"
-      ? '<label for="myCheckbox" class="custom-checkbox"></label><input type="checkbox" disabled id="myCheckbox" />'
-      : '<label for="myCheckbox" class="custom-checkbox"></label><input type="checkbox" id="myCheckbox" />'
-    }    
-    </td>
-    <td>${item.desc}</td>
-    <td>R$ ${item.amount}</td>
     <td class="columnType">${item.type === "entrada"
-      ? '<i class="fa-solid fa-circle-up" title="Entadas"></i>'
+      ? '<i class="fa-solid fa-circle-up" title="Entradas"></i>'
       : '<i class="fa-solid fa-circle-down" title="Saídas"></i>'
+    }</td>
+    <td>${item.desc}</td>
+    <td>R$ ${formattedAmount}</td>
+    <td class="columnType">${item.type !== "entrada" 
+      ? item.pago 
+        ? '<i class="fa-solid fa-check-circle" title="Pago"></i>' 
+        : '<i class="fa-solid fa-circle" title="Não pago"></i>'
+      : '<i class="fa-solid fa-circle-exclamation" title="Tipo Entrada"></i>'
     }</td>    
     <td class="columnAction">
-      <button onclick="editItem(${index})"
+      <button onclick="editItem(${index})" title="Editar">
         <i class="fa-solid fa-pen-to-square"></i>
       </button>
     </td>
     <td class="columnAction">
-      <button onclick="deleteItem(${index})">
+      <button onclick="deleteItem(${index})" title="Excluir">
         <i class="fa-solid fa-trash-can"></i>
       </button>
     </td>

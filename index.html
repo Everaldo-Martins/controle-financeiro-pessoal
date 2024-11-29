@@ -60,10 +60,10 @@
       <table>
         <thead>
           <tr>
-            <th lass="columnType">Pago</th>
+            <th class="columnType">Tipo</th>
             <th>Descrição</th>
             <th class="columnAmount">Valor</th>
-            <th class="columnType">Tipo</th>            
+            <th class="columnType">Pago</th>                        
             <th colspan="2" class="columnAction">Ações</th>            
           </tr>
         </thead>
@@ -96,7 +96,7 @@
 
           <button id="btnNew" class="submit">
             <i class="fa-solid fa-circle-check"></i>
-            Incluir
+            Salvar
           </button>
         </div>
       </div> 
@@ -125,6 +125,14 @@
               <option value="saida">Saída</option>
             </select>
           </div>
+
+          <div class="edit-modal-content-switch">
+            <label for="editPago">Pago:</label>
+            <label class="switch">
+              <input type="checkbox" name="editPago" id="editPago" />
+              <span class="slider round"></span>
+            </label>            
+          </div>                   
       
           <button class="submit" onclick="saveEdit()">
             <i class="fa-solid fa-circle-check"></i>
