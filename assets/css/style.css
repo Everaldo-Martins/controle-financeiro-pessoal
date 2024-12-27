@@ -309,7 +309,7 @@ main .resume {
 }
 
 main .resume>.resume-container {
-  width: calc(33% - 10px);
+  width: calc(25% - 20px);
   padding: 20px;
   background-color: #323232;
   color: #f4f7fc;
@@ -761,7 +761,6 @@ footer span {
   }
 
   main .resume>.resume-container {
-    width: calc(100% - 10px);
     font-size: 0.9rem;
     gap: 10px;
   }
