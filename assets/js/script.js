@@ -17,6 +17,8 @@ let editType = document.getElementById("editType");
 let items;
 let editIndex;
 
+document.getElementById('copy').innerHTML = `&#9400; CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;
+
 const modalNewItem = () => {
   document.querySelector('.add-modal').classList.toggle('visible');
 }
@@ -92,10 +94,14 @@ function saveEdit() {
 }
 
 function insertItem(item, index) {
-  items = getItensBD();
-  let tr = document.createElement("tr");
+  const items = getItensBD();
+  const tbody = document.querySelector("tbody");
 
+  // Formatar o valor
   const formattedAmount = Number(item.amount).toFixed(2);
+
+  // Criar uma nova linha
+  const tr = document.createElement("tr");
 
   tr.innerHTML = `
     <td class="columnType">${item.type === "entrada"
@@ -122,7 +128,9 @@ function insertItem(item, index) {
     </td>
   `;
 
-  tbody.appendChild(tr);
+  // Inserir a nova linha antes da linha fixa de "Adicionar Item"
+  const addItemRow = tbody.querySelector("tr.item");
+  tbody.insertBefore(tr, addItemRow);
 }
 
 function loadItens() {
@@ -247,5 +255,3 @@ window.onclick = function (event) {
     document.querySelector('.add-modal').classList.toggle('visible');
   }
 };
-
-document.querySelector('.copy').innerHTML = `&#9400; CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;

@@ -10,18 +10,18 @@
   <header>
     <a href="/" class="logo"></a>
     <nav>
-      <span class="add-item">
-        <i class="fa-solid fa-circle-plus"></i>
-        Novo Item
-      </span>
-      <span class="about">
+      <a href="/" class="home">
+        <i class="fa-solid fa-home"></i>
+        Home
+      </a>
+      <a href="about.html" class="about">
         <i class="fa-solid fa-circle-exclamation"></i>
         Sobre
-      </span>
-      <span class="contact">
+      </a>
+      <a href="contact.html" class="contact">
         <i class="fa-solid fa-location-dot"></i>
         Contato
-      </span>
+      </a>
     </nav>
   </header>
   <main>
@@ -46,19 +46,12 @@
             <span>Saldo:</span>
             <h3>R$ <span class="total">0.00</span></h3>
         </div>
-      </div>
-      <div class="resume-container">
-        <i class="fa-solid fa-sack-dollar"></i>
-        <div>
-            <span>Principal:</span>
-            <h3>R$ <span class="major">0.00</span></h3>
-        </div>
-      </div>
+      </div>      
     </div>    
 
     <div class="container-table">
       <table>
-        <thead>
+        <thead>          
           <tr>
             <th class="columnType">Tipo</th>
             <th>Descrição</th>
@@ -67,9 +60,13 @@
             <th colspan="2" class="columnAction">Ações</th>            
           </tr>
         </thead>
-        <tbody>
+        <tbody>                             
         </tbody>
       </table>
+
+      <div class="add-item" title="Adicionar Item">
+        <i class="fa-solid fa-circle-plus"></i>
+      </div>
       
       <div class="add-modal">
         <div class="add-modal-container">
@@ -158,7 +155,7 @@
       </div>
   </main>  
   <footer>
-    <span class="copy"></span>
+    <span id="copy"></span>
   </footer>  
   <script src="./assets/js/script.js"></script>
 </body>

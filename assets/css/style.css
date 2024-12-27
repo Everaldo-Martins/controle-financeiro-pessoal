@@ -255,7 +255,7 @@ header nav {
   gap: 20px;
 }
 
-header .add-item,
+header .home,
 header .about,
 header .contact {
   background-color: #424242;
@@ -267,19 +267,20 @@ header .contact {
   color: #f4f7fc;  
   border-radius: 10px;
   display: flex;
-  align-items: center;
+  align-items: center;  
   gap: 10px;
+  text-decoration: none;
   cursor: pointer;
 }
 
-header .add-item:hover,
+header .home:hover,
 header .about:hover,
 header .contact:hover {
   box-shadow: 0 2px 5px #f4f7fc22;
   text-decoration: none;
 }
 
-header .add-item i,
+header .home i,
 header .about i,
 header .contact i {
   font-size: 1.3rem;
@@ -308,7 +309,7 @@ main .resume {
 }
 
 main .resume>.resume-container {
-  width: calc(25% - 20px);
+  width: calc(33% - 10px);
   padding: 20px;
   background-color: #323232;
   color: #f4f7fc;
@@ -394,6 +395,25 @@ main .columnAmount {
 main .columnType {
   width: 80px;
   text-align: center;
+}
+
+main .add-item {
+  background-color: #323232;
+  padding: 10px;
+  position: absolute;
+  border-radius: 10px;
+  bottom: 0;
+  right: 20px;
+  cursor: pointer;
+
+}
+
+main .add-item:hover {
+  box-shadow: 0 4px 12px #f5ac2a99;
+}
+
+main .add-item i {
+  font-size: 2.2rem;
 }
 
 main .add-modal {
@@ -740,12 +760,8 @@ footer span {
     gap: 5px;
   }
 
-  main .resume .resume-container i {
-    font-size: 2.2rem;
-    line-height: 2.5rem;
-  }
-
   main .resume>.resume-container {
+    width: calc(100% - 10px);
     font-size: 0.9rem;
     gap: 10px;
   }
