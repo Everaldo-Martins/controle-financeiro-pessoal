@@ -260,7 +260,7 @@ header .home,
 header .about,
 header .contact {
   background-color: #424242;
-  padding: 10px 25px;
+  padding: 5px 15px;
   font-size: 1rem;
   text-align: center;
   text-transform: uppercase;
@@ -401,9 +401,9 @@ main .columnType {
 main .add-item {
   background-color: #323232;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
-  bottom: 0;
+  bottom: 50px;
   right: 20px;
   cursor: pointer;
 
@@ -763,7 +763,7 @@ footer span {
   header .add-item,
   header .about,
   header .contact {
-    padding: 15px;
+    padding: 10px;
     gap: 5px;
   }
 
