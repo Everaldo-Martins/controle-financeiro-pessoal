@@ -218,6 +218,7 @@ input[type=checkbox]:checked + .slider:before {
   background-size: 200% auto;
   color: #323232;
   font-weight: 500;
+  border: none;
   box-shadow: 0 0 5px #42424233;
   border-radius: 10px;
   cursor: pointer;
@@ -630,7 +631,7 @@ main .delete-modal.active {
 }
 
 main .delete-modal .modal-content {
-  background-color: #323232;
+  background-color: #424242;
   color: #f4f7fc;
   box-shadow: 0 0 8px #f4f7fc33;
   padding: 20px;
@@ -656,18 +657,24 @@ main .delete-modal .modal-content span {
 
 main .delete-modal .modal-content .cancel,
 main .delete-modal .modal-content .confirm {
-  background-color: #424242;
+  background-color: #323232;
   color: #f4f7fc;
   box-shadow: 0 0 8px #f4f7fc33;
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
+  cursor: pointer;
 }
 
 main .delete-modal .modal-content .confirm {
   background-color: red;
   font-weight: 600;
 }
+
+main .delete-modal .modal-content .cancel i,
+main .delete-modal .modal-content .confirm i {
+  color: #f4f7fc;
+} 
 
 footer {
   width: 100%;
