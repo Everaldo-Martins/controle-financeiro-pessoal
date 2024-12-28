@@ -407,7 +407,7 @@ main .add-item {
   padding: 10px;
   position: fixed;
   border-radius: 10px;
-  bottom: 50px;
+  bottom: 52px;
   right: 20px;
   cursor: pointer;
   display: flex;
@@ -575,11 +575,11 @@ main .toast {
   height: fit-content;
   padding: 20px 20px 15px;
   border: none;
-  box-shadow: 0 0 8px #f4f7fc33;
+  box-shadow: 0 0 8px #f4f7fc11;
   border-radius: 10px;
   position: absolute;
   bottom: 0.5rem;
-  right: 0.5rem;
+  left: 0.5rem;
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -751,8 +751,6 @@ footer span {
 
   main .toast {
     width: fit-content;
-    right: 0;
-    top: 0;
   }
 
   footer span {
