@@ -399,7 +399,11 @@ main .columnType {
 }
 
 main .add-item {
-  background-color: #323232;
+  background-color: #f5ac2a;
+  color: #323232;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 160px;
   padding: 10px;
   position: fixed;
   border-radius: 10px;
@@ -408,14 +412,14 @@ main .add-item {
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   gap: 10px;
-
 }
 
 main .add-item:hover {
-  box-shadow: 0 4px 12px #f5ac2a99;
+  background-color: #ed9600;
+  box-shadow: 0 4px 12px #f4f7fc22;
 }
 
 main .add-item i {
@@ -788,24 +792,5 @@ footer span {
   main .resume .resume-container .total,
   main .resume .resume-container .major {
     font-size: 1.4rem;
-  }
-
-  main .add-item {
-    background-color: #32323299;
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    right: 20px; 
-    justify-content: center;
-    border-radius: 0;
-  }
-
-  main .add-item:hover {
-    box-shadow: 0 2px 4px #f5ac2a99;
-  }
-
-  main .add-item i {
-    font-size: 1.2rem;
-    line-height: 1.2rem;
   }
 }
