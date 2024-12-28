@@ -403,16 +403,13 @@ main .add-item {
   color: #323232;
   font-size: 1rem;
   font-weight: 500;
-  width: 160px;
+  width: 100%;
+  height: fit-content;
   padding: 10px;
-  position: fixed;
-  border-radius: 10px;
-  bottom: 52px;
-  right: 20px;
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }
@@ -423,7 +420,7 @@ main .add-item:hover {
 }
 
 main .add-item i {
-  font-size: 2.2rem;
+  font-size: 2rem;
   vertical-align: middle;
 }
 
