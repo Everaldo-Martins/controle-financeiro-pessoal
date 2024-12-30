@@ -74,9 +74,50 @@ html {
   padding: 0;
 }
 
+:root {
+  --background: #f2f2f2;
+  --secondary-background: #ffffff;
+  --background-radial: radial-gradient(circle, #ffffff 1%, #e4ebef 100%);
+  --background-modal: #f2f2f233;
+  --logo: #3d7eff;
+  --foreground: #333333;
+  --secondary-foreground: #666666;
+  --border: #333333;
+  --border-hover: #3d7eff;
+  --shadown: #33333311;
+  --warning-bg: #ffe5e5;
+  --warning-icon: #d8000c;
+  --button: #3d7eff;
+  --button-cancel: #ff0066;
+  --button-google: #ff4b4b;
+  --button-facebook: #1877f2;
+  --button-apple: #000000;
+  --button-hover: #2e73fc;
+  --entries: #00ff00;
+  --exits: #fb4545;
+  --balance: #ffbf00;
+  --success: #00C9A7;
+  --erro: #D83121;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #01081f;
+    --secondary-background: #050d24;
+    --background-radial: radial-gradient(circle, #051340 1%, #040f32 100%);
+    --background-modal: #01081f33;
+    --foreground: #f2f2f2;
+    --secondary-foreground: #e4e4e4;
+    --border: #050d24;
+    --border-hover: #3d7eff;
+    --shadown: #f2f2f211;
+    --warning-bg: #081230;
+  }
+}
+
 body {
-  background-color: #424242;
-  color: #f4f7fc;
+  background-color: var(--background);
+  color: var(--foreground);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,22 +127,22 @@ body {
 
 /* Barra de rolagem */
 ::-webkit-scrollbar {
-  background-color: #323232;
+  background-color: var(--background);
   width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 2px #424242;
+  box-shadow: inset 0 0 2px var(--background);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #424242;
+  background-color: var(--background);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #f5ac2a;
+  background-color: var(--background-radial);
 }
 
 /* Ícones */
@@ -130,22 +171,22 @@ select:hover,
 select:focus,
 select:visited,
 select:active {
-  background-color: #424242;
+  background-color: var(--background);
   min-width: 200px;
   padding: 15px;
   font-weight: 400;
   font-style: normal;
   font-size: 1rem;
-  border: 1px solid #323232;
-  box-shadow: inset 0 0 4px #f4f7fc33;
+  border: 1px solid var(--border);
+  box-shadow: inset 0 0 4px var(--shadown);
   border-radius: 10px;
-  color: #f4f7fc;
+  color: var(--foreground);
   outline: none;
 }
 
 input[type=text]::placeholder,
 input[type=number]::placeholder {
-  color: #f4f7fc;
+  color: var(--foreground);
 }
 
 .switch {
@@ -168,7 +209,7 @@ input[type=number]::placeholder {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #424242;
+  background-color: var(--background);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -180,17 +221,17 @@ input[type=number]::placeholder {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: #323232;
+  background-color: var(--foreground);
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input[type=checkbox]:checked + .slider {
-  background-color: #f5ac2a;
+  background: var(--background-radial);
 }
 
 input[type=checkbox]:focus + .slider {
-  box-shadow: 0 0 1px #f5ac2a;
+  box-shadow: 0 0 1px var(--shadown);
 }
 
 input[type=checkbox]:checked + .slider:before {
@@ -210,16 +251,16 @@ input[type=checkbox]:checked + .slider:before {
 
 /* Botões */
 .submit {
-  background-image: linear-gradient(to right, #f5ac2a 0%, #ed9600 51%, #f5ac2a 100%);
+  background: var(--button);
   padding: 15px 25px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
-  color: #323232;
+  color: var(--foreground);
   font-weight: 500;
   border: none;
-  box-shadow: 0 0 5px #42424233;
+  box-shadow: 0 0 5px var(--shadown);
   border-radius: 10px;
   cursor: pointer;
 }
@@ -231,7 +272,7 @@ input[type=checkbox]:checked + .slider:before {
 
 /* Header */
 header {
-  background-color: #323232;
+  background: var(--background-radial);
   width: 100%;
   height: 50px;
   padding: 20px;
@@ -244,7 +285,7 @@ header {
 header .logo {
   width: 51px;
   height: 35px;
-  color: #f4f7fc;
+  color: var(--foreground);
   background-image: url('../img/logo.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -259,13 +300,13 @@ header nav {
 header .home,
 header .about,
 header .contact {
-  background-color: #424242ee;
-  padding: 5px 15px;
+  background: var(--background);
+  padding: 10px 15px;
   font-size: 1rem;
   text-align: center;
   text-transform: uppercase;
   text-wrap: nowrap;
-  color: #f4f7fc;  
+  color: var(--foreground);  
   border-radius: 10px;
   display: flex;
   align-items: center;  
@@ -277,7 +318,7 @@ header .contact {
 header .home:hover,
 header .about:hover,
 header .contact:hover {
-  box-shadow: 0 2px 5px #f4f7fc22;
+  box-shadow: 0 2px 5px var(--shadown);
   text-decoration: none;
 }
 
@@ -285,7 +326,7 @@ header .home i,
 header .about i,
 header .contact i {
   font-size: 1.3rem;
-  color: #f4f7fc;
+  color: var(--foreground);
 }
 
 /* Main */
@@ -312,15 +353,15 @@ main .resume {
 main .resume>.resume-container {
   width: calc(25% - 20px);
   padding: 20px;
-  background-color: #323232;
-  color: #f4f7fc;
+  background: var(--background-radial);
+  color: var(--foreground);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 5px #f4f7fc33;
+  box-shadow: 0 0 5px var(--shadown);
 }
 
 main .resume .resume-container i {
@@ -333,7 +374,7 @@ main .resume .resume-container .expenses,
 main .resume .resume-container .total,
 main .resume .resume-container .major {
   width: fit-content;
-  color: #f4f7fc;
+  color: var(--foreground);
   font-size: 1.8rem;
   font-weight: 700;
   text-align: left;
@@ -348,7 +389,7 @@ main .container-table {
 
 main table {
   width: 100%;
-  color: #f4f7fc;
+  color: var(--foreground);
   padding: 20px 0;
   border-radius: 5px;
   border-collapse: collapse;
@@ -358,7 +399,7 @@ main th {
   padding: 5px;
   text-align: start;
   border-bottom: inset;
-  border-color: #f5ac2a;
+  border-color: var(--button);
 }
 
 main tbody tr td {
@@ -370,7 +411,7 @@ main tbody tr td i {
 }
 
 main tbody tr:nth-child(odd) {
-  background: #32323266;
+  background: var(--shadown);
 }
 
 main .columnAction {
@@ -380,13 +421,13 @@ main .columnAction {
 
 main .columnAction>button {
   background: transparent;
-  color: #f4f7fc;
+  color: var(--foreground);
   border: none;
   cursor: pointer;
 }
 
 main .columnAction button>i {
-  color: #f4f7fc;
+  color: var(--foreground);
 }
 
 main .columnAmount {
@@ -399,8 +440,8 @@ main .columnType {
 }
 
 main .add-item {
-  background-color: #f5ac2a;
-  color: #323232;
+  background-color: var(--button);
+  color: var(--foreground);
   font-size: 1rem;
   font-weight: 500;
   width: 100%;
@@ -415,8 +456,8 @@ main .add-item {
 }
 
 main .add-item:hover {
-  background-color: #ed9600;
-  box-shadow: 0 4px 12px #f4f7fc22;
+  background-color: var(--button-hover);
+  box-shadow: 0 4px 12px var(--shadown);
 }
 
 main .add-item i {
@@ -425,7 +466,7 @@ main .add-item i {
 }
 
 main .add-modal {
-  background-color: rgba(50, 50, 50, 0.2);
+  background-color: var(--background-modal);
   backdrop-filter: blur(0.8rem);
   display: none;
   align-items: center;
@@ -443,9 +484,9 @@ main .add-modal.visible {
 }
 
 main .add-modal-container {
-  background-color: #323232;
-  color: #f4f7fc;
-  box-shadow: 0 0 8px #f4f7fc33;
+  background: var(--background-radial);
+  color: var(--foreground);
+  box-shadow: 0 0 8px var(--shadown);
   width: 100%;
   max-width: 400px;
   height: fit-content;
@@ -487,7 +528,7 @@ main .add-modal-container .add-modal-content {
 
 main .add-modal-container .close {
   font-size: 1.5rem;
-  color: #D83121;
+  color: var(--button-cancel);
   position: absolute;
   top: 10px;
   right: 0;
@@ -495,7 +536,7 @@ main .add-modal-container .close {
 }
 
 main .edit-modal {
-  background-color: rgba(50, 50, 50, 0.2);
+  background-color: var(--background-modal);
   backdrop-filter: blur(0.8rem);
   display: none;
   align-items: center;
@@ -513,9 +554,9 @@ main .edit-modal.visible {
 }
 
 main .edit-modal-container {
-  background-color: #323232;
-  color: #f4f7fc;
-  box-shadow: 0 0 5px #f4f7fc33;
+  background: var(--background-radial);
+  color: var(--foreground);
+  box-shadow: 0 0 5px var(--shadown);
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -559,7 +600,7 @@ main .edit-modal .edit-modal-content select {
 
 main .edit-modal #closeModal {
   font-size: 1.5rem;
-  color: #D83121;
+  color: var(--button-cancel);
   position: absolute;
   top: 12px;
   right: 0;
@@ -567,12 +608,12 @@ main .edit-modal #closeModal {
 }
 
 main .toast {
-  background-color: #323232;
+  background: var(--background-radial);
   width: fit-content;
   height: fit-content;
   padding: 20px 20px 15px;
   border: none;
-  box-shadow: 0 0 8px #f4f7fc11;
+  box-shadow: 0 0 8px var(--shadown);
   border-radius: 10px;
   position: absolute;
   bottom: 0.5rem;
@@ -605,19 +646,19 @@ main .toast.error {
 }
 
 main .toast.success .msg {
-  color: #00C9A7;
+  color: var(--success);
 }
 
 main .toast.success .fa-solid {
-  color: #00C9A7;
+  color: var(--success);
 }
 
 main .toast.error .msg {
-  color: #D83121;
+  color: var(--erro);
 }
 
 main .toast.error .fa-solid {
-  color: #D83121;
+  color: var(--erro);
 }
 
 main .delete-modal {
@@ -627,7 +668,7 @@ main .delete-modal {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(50, 50, 50, 0.2);
+  background-color: var(--background-modal);
   backdrop-filter: blur(0.8rem);
   justify-content: center;
   align-items: center;
@@ -638,9 +679,9 @@ main .delete-modal.active {
 }
 
 main .delete-modal .modal-content {
-  background-color: #424242;
-  color: #f4f7fc;
-  box-shadow: 0 0 8px #f4f7fc33;
+  background: var(--background-radial);
+  color: var(--foreground);
+  box-shadow: 0 0 8px var(--shadown);
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -664,9 +705,9 @@ main .delete-modal .modal-content span {
 
 main .delete-modal .modal-content .cancel,
 main .delete-modal .modal-content .confirm {
-  background-color: #323232;
-  color: #f4f7fc;
-  box-shadow: 0 0 8px #f4f7fc33;
+  background-color: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 0 8px var(--shadown);
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
@@ -674,13 +715,13 @@ main .delete-modal .modal-content .confirm {
 }
 
 main .delete-modal .modal-content .confirm {
-  background-color: red;
+  background-color: var(--erro);
   font-weight: 600;
 }
 
 main .delete-modal .modal-content .cancel i,
 main .delete-modal .modal-content .confirm i {
-  color: #f4f7fc;
+  color: var(--foreground);
 } 
 
 footer {
@@ -696,7 +737,7 @@ footer span {
   width: 100%;
   text-align: center;
   font-size: 1rem;
-  color: #f4f7fc;
+  color: var(--foreground);
 }
 
 @media screen and (width <= 840px) {
