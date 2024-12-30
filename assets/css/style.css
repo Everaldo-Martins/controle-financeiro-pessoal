@@ -116,7 +116,7 @@ html {
 }
 
 body {
-  background-color: var(--background);
+  background: var(--background-radial);
   color: var(--foreground);
   display: flex;
   flex-direction: column;
@@ -127,22 +127,22 @@ body {
 
 /* Barra de rolagem */
 ::-webkit-scrollbar {
-  background-color: var(--background);
+  background: var(--background-radial);
   width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 2px var(--background);
+  box-shadow: inset 0 0 2px var(--shadown);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--background);
+  background-color: var(--secondary-background);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--background-radial);
+  background-color: var(--background);
 }
 
 /* Ícones */
@@ -272,7 +272,7 @@ input[type=checkbox]:checked + .slider:before {
 
 /* Header */
 header {
-  background: var(--background-radial);
+  background: var(--background);
   width: 100%;
   height: 50px;
   padding: 20px;
@@ -294,13 +294,13 @@ header .logo {
 
 header nav {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 header .home,
 header .about,
 header .contact {
-  background: var(--background);
+  background: var(--background-radial);
   padding: 10px 15px;
   font-size: 1rem;
   text-align: center;
@@ -353,7 +353,7 @@ main .resume {
 main .resume>.resume-container {
   width: calc(25% - 20px);
   padding: 20px;
-  background: var(--background-radial);
+  background: var(--background);
   color: var(--foreground);
   display: flex;
   flex-direction: row;
@@ -396,18 +396,20 @@ main table {
 }
 
 main th {
-  padding: 5px;
+  background-color: var(--background);
+  padding: 10px;
   text-align: start;
   border-bottom: inset;
   border-color: var(--button);
 }
 
 main tbody tr td {
-  padding: 15px 10px;
+  padding: 10px;
 }
 
 main tbody tr td i {
   font-size: 1rem;
+  vertical-align: middle;
 }
 
 main tbody tr:nth-child(odd) {
@@ -428,6 +430,7 @@ main .columnAction>button {
 
 main .columnAction button>i {
   color: var(--foreground);
+  vertical-align: middle;
 }
 
 main .columnAmount {
@@ -440,7 +443,7 @@ main .columnType {
 }
 
 main .add-item {
-  background-color: var(--button);
+  background-color: var(--background);
   color: var(--foreground);
   font-size: 1rem;
   font-weight: 500;
@@ -456,12 +459,11 @@ main .add-item {
 }
 
 main .add-item:hover {
-  background-color: var(--button-hover);
-  box-shadow: 0 4px 12px var(--shadown);
+  background-color: var(--secondary-background);
 }
 
 main .add-item i {
-  font-size: 2rem;
+  font-size: 1.6rem;
   vertical-align: middle;
 }
 
@@ -484,7 +486,7 @@ main .add-modal.visible {
 }
 
 main .add-modal-container {
-  background: var(--background-radial);
+  background: var(--background);
   color: var(--foreground);
   box-shadow: 0 0 8px var(--shadown);
   width: 100%;
@@ -554,7 +556,7 @@ main .edit-modal.visible {
 }
 
 main .edit-modal-container {
-  background: var(--background-radial);
+  background: var(--background);
   color: var(--foreground);
   box-shadow: 0 0 5px var(--shadown);
   width: 100%;
@@ -608,7 +610,7 @@ main .edit-modal #closeModal {
 }
 
 main .toast {
-  background: var(--background-radial);
+  background: var(--background);
   width: fit-content;
   height: fit-content;
   padding: 20px 20px 15px;
@@ -630,7 +632,7 @@ main .toast {
 
 main .toast .msg {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 main .toast .fa-solid {
