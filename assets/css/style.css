@@ -75,9 +75,9 @@ html {
 }
 
 :root {
-  --background: #f2f2f2;
-  --secondary-background: #ffffff;
-  --background-radial: radial-gradient(circle, #ffffff 1%, #e4ebef 100%);
+  --background: #f0f0f0;
+  --secondary-background: #f5f5f5;
+  --background-radial: radial-gradient(circle, #f2f2f2 1%, #dde2e4 100%);
   --background-modal: #f2f2f233;
   --logo: #3d7eff;
   --foreground: #333333;
@@ -282,14 +282,25 @@ header {
   gap: 10px;
 }
 
-header .logo {
-  width: 51px;
-  height: 35px;
+header a,
+header a:hover,
+header a:visited {
+  width: fit-content;
+  padding: 5px 0 0 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-decoration: none;
   color: var(--foreground);
-  background-image: url('../img/logo.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  width: 45px;
+  height: 45px;
+  color: var(--foreground);
+  text-decoration: none;
 }
 
 header nav {
@@ -318,6 +329,8 @@ header .contact {
 header .home:hover,
 header .about:hover,
 header .contact:hover {
+  padding: 10px 15px;
+  font-size: 1rem;
   box-shadow: 0 2px 5px var(--shadown);
   text-decoration: none;
 }
@@ -747,11 +760,6 @@ footer span {
     height: fit-content;
     flex-direction: column;
     gap: 20px;
-  }
-  
-  header .logo {
-    width: 70px;
-    height: 48px;
   }
 
   main .resume {
