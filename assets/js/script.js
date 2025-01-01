@@ -94,13 +94,8 @@ function saveEdit() {
 }
 
 function insertItem(item, index) {
-  const items = getItensBD();
   const tbody = document.querySelector("tbody");
-
-  // Formatar o valor
   const formattedAmount = Number(item.amount).toFixed(2);
-
-  // Criar uma nova linha
   const tr = document.createElement("tr");
 
   tr.innerHTML = `
@@ -127,8 +122,7 @@ function insertItem(item, index) {
       </button>
     </td>
   `;
-
-  // Inserir a nova linha antes da linha fixa de "Adicionar Item"
+  
   const addItemRow = tbody.querySelector("tr.item");
   tbody.insertBefore(tr, addItemRow);
 }
@@ -175,14 +169,28 @@ function getTotals() {
 
 }
 
-const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
+function getCurrentMonthKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}`;
+}
+
+function loadItemsForMonth(monthKey) {
+  const storedItems = JSON.parse(localStorage.getItem(`db_items_${monthKey}`)) ?? [];
+  items = storedItems;
+  loadItens();
+}
+
+const getItensBD = () => {
+  const monthKey = getCurrentMonthKey();
+  return JSON.parse(localStorage.getItem(`db_items_${monthKey}`)) ?? [];
+};
 
 const setItensBD = () => {
+  const monthKey = getCurrentMonthKey();
   try {
-    localStorage.setItem("db_items", JSON.stringify(items));
+    localStorage.setItem(`db_items_${monthKey}`, JSON.stringify(items));
     return true;
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Erro ao salvar no localStorage:", error);
     return false;
   }
@@ -215,6 +223,38 @@ document.querySelector('.cancel').addEventListener('click', function () {
 });
 
 loadItens();
+
+function populateMonthSelect() {
+  const select = document.getElementById("monthSelect");
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+
+  const monthNames = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
+
+  for (let i = 0; i < 12; i++) {
+    const date = new Date(currentYear, currentMonth - i - 1, 1);
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    const monthKey = `${year}-${(month + 1).toString().padStart(2, '0')}`;
+    const option = document.createElement("option");
+    option.value = monthKey;
+    option.textContent = `${monthNames[month]} de ${year}`;
+    select.appendChild(option);
+  }
+
+  select.value = getCurrentMonthKey();
+}
+
+function changeMonth(monthKey) {
+  loadItemsForMonth(monthKey);
+}
+
+populateMonthSelect();
 
 function newToast(sts, message) {
   let main = document.querySelector('main');

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistam Financeiro Pessoal</title>
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
   <header>
     <a href="./" class="logo"></a>
@@ -29,45 +31,54 @@
       <div class="resume-container">
         <i class="fa-solid fa-circle-up"></i>
         <div>
-            <span>Entadas:</span>
-            <h3>R$ <span class="incomes">0.00</span></h3>
+          <span>Entadas:</span>
+          <h3>R$ <span class="incomes">0.00</span></h3>
         </div>
       </div>
       <div class="resume-container">
         <i class="fa-solid fa-circle-down"></i>
         <div>
-            <span>Saídas:</span>
-            <h3>R$ <span class="expenses">0.00</span></h3>
+          <span>Saídas:</span>
+          <h3>R$ <span class="expenses">0.00</span></h3>          
         </div>
       </div>
       <div class="resume-container">
         <i class="fa-solid fa-hand-holding-dollar"></i>
         <div>
-            <span>Saldo:</span>
-            <h3>R$ <span class="total">0.00</span></h3>
+          <span>Saldo:</span>
+          <h3>R$ <span class="total">0.00</span></h3>
         </div>
       </div>
       <div class="resume-container">
         <i class="fa-solid fa-sack-dollar"></i>
         <div>
-            <span>M. Entrada:</span>
-            <h3>R$ <span class="major">0.00</span></h3>
+          <span>M. Entrada:</span>
+          <h3>R$ <span class="major">0.00</span></h3>
         </div>
       </div>
-    </div>     
+    </div>
 
     <div class="container-table">
       <table>
-        <thead>          
+        <thead>
+          <tr>
+            <td colspan="6">
+              <div class="month">
+                <label for="monthSelect">Selecionar mês:</label>
+                <select id="monthSelect" class="active" onchange="changeMonth(this.value)">
+                </select>
+              </div>
+            </td>
+          </tr>
           <tr>
             <th class="columnType">Tipo</th>
             <th>Descrição</th>
             <th class="columnAmount">Valor</th>
-            <th class="columnType">Pago</th>                        
-            <th colspan="2" class="columnAction">Ações</th>            
+            <th class="columnType">Pago</th>
+            <th colspan="2" class="columnAction">Ações</th>
           </tr>
         </thead>
-        <tbody>                             
+        <tbody>
         </tbody>
       </table>
 
@@ -75,7 +86,7 @@
         <i class="fa-solid fa-circle-plus"></i>
         <span>Adicionar Item</span>
       </div>
-      
+
       <div class="add-modal">
         <div class="add-modal-container">
           <div class="add-modal-content">
@@ -104,25 +115,25 @@
             Salvar
           </button>
         </div>
-      </div> 
+      </div>
 
       <div class="edit-modal">
         <div class="edit-modal-container">
           <div class="edit-modal-content">
-            <i id="closeModal" class="fa-solid fa-circle-xmark"></i>            
+            <i id="closeModal" class="fa-solid fa-circle-xmark"></i>
             <h3>Editar Item</h3>
           </div>
-          
+
           <div class="edit-modal-content">
             <label for="editDesc">Descrição:</label>
             <input type="text" id="editDesc" />
           </div>
-      
+
           <div class="edit-modal-content">
             <label for="editAmount">Valor:</label>
             <input type="number" id="editAmount" />
           </div>
-      
+
           <div class="edit-modal-content">
             <label for="editType">Tipo:</label>
             <select id="editType">
@@ -136,16 +147,16 @@
             <label class="switch">
               <input type="checkbox" name="editPago" id="editPago" />
               <span class="slider round"></span>
-            </label>            
-          </div>                   
-      
+            </label>
+          </div>
+
           <button class="submit" onclick="saveEdit()">
             <i class="fa-solid fa-circle-check"></i>
             Salvar
           </button>
         </div>
       </div>
-      
+
       <div class="delete-modal">
         <div class="modal-content">
           <p>Quer realmente deletar esse item?</p>
@@ -161,10 +172,11 @@
           </span>
         </div>
       </div>
-  </main>  
+  </main>
   <footer>
     <span id="copy"></span>
-  </footer>  
+  </footer>
   <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

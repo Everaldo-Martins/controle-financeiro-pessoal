@@ -184,6 +184,10 @@ select:active {
   outline: none;
 }
 
+select.active {
+  text-align: center;
+}
+
 input[type=text]::placeholder,
 input[type=number]::placeholder {
   color: var(--foreground);
@@ -380,6 +384,70 @@ main .resume .resume-container .major {
   text-align: left;
 }
 
+.chart-svg {
+  position: relative;
+  max-width: 90px;
+  min-width: 40px;
+  flex: 1;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 1.2;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  -webkit-animation: progress 1s ease-out forwards;
+  animation: progress 1s ease-out forwards;
+}
+
+.circular-chart.orange .circle {
+  stroke: #ff9f00;
+}
+
+.circular-chart.orange .circle-bg {
+  stroke: #776547;
+}
+
+.circular-chart.green .circle {
+  stroke: #00de25;
+}
+
+.circular-chart.green .circle-bg {
+  stroke: #5c8855;
+}
+
+.circular-chart.pink .circle {
+  stroke: #ff7dcb;
+}
+
+.circular-chart.pink .circle-bg {
+  stroke: #6f5684;
+}
+
+.percentage {
+  fill: #fff;
+  font-size: 0.5em;
+  text-anchor: middle;
+  font-weight: 400;
+}
+
+@-webkit-keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
 main .container-table {
   width: 100%;
   display: flex;
@@ -401,6 +469,16 @@ main th {
   text-align: start;
   border-bottom: inset;
   border-color: var(--button);
+}
+
+main .month {
+  width: 100%;
+  padding: 5px 0 15px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  gap: 10px;
 }
 
 main tbody tr td {
