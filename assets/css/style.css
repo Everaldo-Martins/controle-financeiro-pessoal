@@ -299,7 +299,7 @@ header a:visited {
 header .logo {
   width: 45px;
   height: 45px;
-  color: var(--foreground);
+  color: var(--logo);
   text-decoration: none;
 }
 
@@ -720,7 +720,7 @@ main .delete-modal .modal-content span {
 
 main .delete-modal .modal-content .cancel,
 main .delete-modal .modal-content .confirm {
-  background-color: var(--background);
+  background: var(--background-radial);
   color: var(--foreground);
   box-shadow: 0 0 8px var(--shadown);
   border: none;
@@ -730,13 +730,15 @@ main .delete-modal .modal-content .confirm {
 }
 
 main .delete-modal .modal-content .confirm {
-  background-color: var(--erro);
+  background: var(--erro);
   font-weight: 600;
 }
 
 main .delete-modal .modal-content .cancel i,
 main .delete-modal .modal-content .confirm i {
+  font-size: 1.2rem;
   color: var(--foreground);
+  vertical-align: middle;
 } 
 
 footer {
@@ -807,10 +809,16 @@ footer span {
 }
 
 @media screen and (width <= 480px) {
-  header .logo {
-    width: 51px;
-    height: 35px;
-  }
+  header a,
+header a:hover,
+header a:visited {
+  font-size: 2rem;
+}
+
+header .logo {
+  width: 55px;
+  height: 55px;
+}
 
   header nav {
     gap: 10px;
