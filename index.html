@@ -2,181 +2,202 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistam Financeiro Pessoal</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sistam Financeiro Pessoal</title>
+	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-  <header>
-    <a href="./">
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="logo">
-        <line x1="18" y1="20" x2="18" y2="10" />
-        <line x1="12" y1="20" x2="12" y2="4" />
-        <line x1="6" y1="20" x2="6" y2="14" />
-      </svg>
-      CFP
-    </a>
-    <nav>
-      <a href="./" class="home">
-        <i class="fa-solid fa-home"></i>
-        Home
-      </a>
-      <a href="./about.html" class="about">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        Sobre
-      </a>
-      <a href="./contact.html" class="contact">
-        <i class="fa-solid fa-location-dot"></i>
-        Contato
-      </a>
-    </nav>
-  </header>
-  <main>
-    <div class="resume">
-      <div class="resume-container">
-        <i class="fa-solid fa-circle-up"></i>
-        <div>
-          <span>Entadas:</span>
-          <h3>R$ <span class="incomes">0.00</span></h3>
-        </div>
-      </div>
-      <div class="resume-container">
-        <i class="fa-solid fa-circle-down"></i>
-        <div>
-          <span>Saídas:</span>
-          <h3>R$ <span class="expenses">0.00</span></h3>
-        </div>
-      </div>
-      <div class="resume-container">
-        <i class="fa-solid fa-hand-holding-dollar"></i>
-        <div>
-          <span>Saldo:</span>
-          <h3>R$ <span class="total">0.00</span></h3>
-        </div>
-      </div>
-      <div class="resume-container">
-        <i class="fa-solid fa-sack-dollar"></i>
-        <div>
-          <span>M. Entrada:</span>
-          <h3>R$ <span class="major">0.00</span></h3>
-        </div>
-      </div>
-    </div>
+	<header>
+		<a href="./">
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo">
+				<line x1="18" y1="20" x2="18" y2="10" />
+				<line x1="12" y1="20" x2="12" y2="4" />
+				<line x1="6" y1="20" x2="6" y2="14" />
+			</svg>
+			CFP
+		</a>
+		<nav>
+			<a href="./" class="home">
+				<i class="fa-solid fa-home"></i>
+				Home
+			</a>
+			<a href="./about.html" class="about">
+				<i class="fa-solid fa-circle-exclamation"></i>
+				Sobre
+			</a>
+			<a href="./contact.html" class="contact">
+				<i class="fa-solid fa-location-dot"></i>
+				Contato
+			</a>
+		</nav>
+	</header>
+	<main>
+		<div class="resume">
+			<div class="resume-container">
+				<i class="fa-solid fa-circle-up"></i>
+				<div>
+					<span>Entadas:</span>
+					<h3>R$ <span class="incomes">0.00</span></h3>
+				</div>
+			</div>
+			<div class="resume-container">
+				<i class="fa-solid fa-circle-down"></i>
+				<div>
+					<span>Saídas:</span>
+					<h3>R$ <span class="expenses">0.00</span></h3>
+				</div>
+			</div>
+			<div class="resume-container">
+				<i class="fa-solid fa-hand-holding-dollar"></i>
+				<div>
+					<span>Saldo:</span>
+					<h3>R$ <span class="total">0.00</span></h3>
+				</div>
+			</div>
+			<div class="resume-container">
+				<i class="fa-solid fa-sack-dollar"></i>
+				<div>
+					<span>S. Anterior:</span>
+					<h3>R$ <span class="balance">0.00</span></h3>
+				</div>
+			</div>
+		</div>
 
-    <div class="container-table">
-      <table>
-        <thead>
-          <tr>
-            <th class="columnType">Tipo</th>
-            <th>Descrição</th>
-            <th class="columnAmount">Valor</th>
-            <th class="columnType">Pago</th>
-            <th colspan="2" class="columnAction">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+		<div class="filter">
+			<label for="month">Mês:</label>
+			<select id="month">
+				<option value="" selected>Selecionar mês</option>
+				<option value="janeiro">Janeiro</option>
+				<option value="fevereiro">Fevereiro</option>
+				<option value="março">Março</option>
+				<option value="abril">Abril</option>
+				<option value="maio">Maio</option>
+				<option value="junho">Junho</option>
+				<option value="julho">Julho</option>
+				<option value="agosto">Agosto</option>
+				<option value="setembro">Setembro</option>
+				<option value="outubro">Outubro</option>
+				<option value="novembro">Novembro</option>
+				<option value="dezembro">Dezembro</option>
+			</select>
 
-      <div class="add-item" title="Adicionar Item">
-        <i class="fa-solid fa-circle-plus"></i>
-        <span>Adicionar Item</span>
-      </div>
+			<label for="year">Ano:</label>
+			<select id="year"></select>
+		</div>
 
-      <div class="add-modal">
-        <div class="add-modal-container">
-          <div class="add-modal-content">
-            <h3>Adicionar Novo Item</h3>
-            <i class="close fa-solid fa-circle-xmark"></i>
-          </div>
+		<div class="container-table">
+			<table>
+				<thead>
+					<tr>
+						<th class="columnType">Tipo</th>
+						<th>Descrição</th>
+						<th class="columnAmount">Valor</th>
+						<th class="columnType">Pago</th>
+						<th colspan="2" class="columnAction">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
 
-          <div class="desc">
-            <input type="text" id="desc" placeholder="Descrição" />
-          </div>
+			<div class="add-item" title="Adicionar Item">
+				<i class="fa-solid fa-circle-plus"></i>
+				<span>Adicionar Item</span>
+			</div>
 
-          <div class="amount">
-            <input type="number" id="amount" placeholder="Valor" />
-          </div>
+			<div class="add-modal">
+				<div class="add-modal-container">
+					<div class="add-modal-content">
+						<h3>Adicionar Novo Item</h3>
+						<i class="close fa-solid fa-circle-xmark"></i>
+					</div>
 
-          <div class="type">
-            <select id="type">
-              <option value="">Tipo</option>
-              <option value="entrada">Entrada</option>
-              <option value="saida">Saída</option>
-            </select>
-          </div>
+					<div class="desc">
+						<input type="text" id="desc" placeholder="Descrição" />
+					</div>
 
-          <button id="btnNew" class="submit">
-            <i class="fa-solid fa-circle-check"></i>
-            Salvar
-          </button>
-        </div>
-      </div>
+					<div class="amount">
+						<input type="number" id="amount" placeholder="Valor" />
+					</div>
 
-      <div class="edit-modal">
-        <div class="edit-modal-container">
-          <div class="edit-modal-content">
-            <i id="closeModal" class="fa-solid fa-circle-xmark"></i>
-            <h3>Editar Item</h3>
-          </div>
+					<div class="type">
+						<select id="type">
+							<option value="">Tipo</option>
+							<option value="entrada">Entrada</option>
+							<option value="saida">Saída</option>
+						</select>
+					</div>
 
-          <div class="edit-modal-content">
-            <label for="editDesc">Descrição:</label>
-            <input type="text" id="editDesc" />
-          </div>
+					<button id="btnNew" class="submit">
+						<i class="fa-solid fa-circle-check"></i>
+						Salvar
+					</button>
+				</div>
+			</div>
 
-          <div class="edit-modal-content">
-            <label for="editAmount">Valor:</label>
-            <input type="number" id="editAmount" />
-          </div>
+			<div class="edit-modal">
+				<div class="edit-modal-container">
+					<div class="edit-modal-content">
+						<i id="closeModal" class="fa-solid fa-circle-xmark"></i>
+						<h3>Editar Item</h3>
+					</div>
 
-          <div class="edit-modal-content">
-            <label for="editType">Tipo:</label>
-            <select id="editType">
-              <option value="entrada">Entrada</option>
-              <option value="saida">Saída</option>
-            </select>
-          </div>
+					<div class="edit-modal-content">
+						<label for="editDesc">Descrição:</label>
+						<input type="text" id="editDesc" />
+					</div>
 
-          <div class="edit-modal-content-switch">
-            <label for="editPago">Pago:</label>
-            <label class="switch">
-              <input type="checkbox" name="editPago" id="editPago" />
-              <span class="slider round"></span>
-            </label>
-          </div>
+					<div class="edit-modal-content">
+						<label for="editAmount">Valor:</label>
+						<input type="number" id="editAmount" />
+					</div>
 
-          <button class="submit" onclick="saveEdit()">
-            <i class="fa-solid fa-circle-check"></i>
-            Salvar
-          </button>
-        </div>
-      </div>
+					<div class="edit-modal-content">
+						<label for="editType">Tipo:</label>
+						<select id="editType">
+							<option value="entrada">Entrada</option>
+							<option value="saida">Saída</option>
+						</select>
+					</div>
 
-      <div class="delete-modal">
-        <div class="modal-content">
-          <p>Quer realmente deletar esse item?</p>
-          <span>
-            <button class="confirm">
-              <i class="fa-solid fa-circle-exclamation"></i>
-              Delete
-            </button>
-            <button class="cancel">
-              <i class="fa-solid fa-circle-xmark"></i>
-              Cancelar
-            </button>
-          </span>
-        </div>
-      </div>
-  </main>
-  <footer>
-    <span id="copy"></span>
-  </footer>
-  <script src="./assets/js/script.js"></script>
+					<div class="edit-modal-content-switch">
+						<label for="editPago">Pago:</label>
+						<label class="switch">
+							<input type="checkbox" name="editPago" id="editPago" />
+							<span class="slider round"></span>
+						</label>
+					</div>
+
+					<button class="submit" onclick="saveEdit()">
+						<i class="fa-solid fa-circle-check"></i>
+						Salvar
+					</button>
+				</div>
+			</div>
+
+			<div class="delete-modal">
+				<div class="modal-content">
+					<p>Quer realmente deletar esse item?</p>
+					<span>
+						<button class="confirm">
+							<i class="fa-solid fa-circle-exclamation"></i>
+							Delete
+						</button>
+						<button class="cancel">
+							<i class="fa-solid fa-circle-xmark"></i>
+							Cancelar
+						</button>
+					</span>
+				</div>
+			</div>
+	</main>
+	<footer>
+		<span id="copy"></span>
+	</footer>
+	<script src="./assets/js/script.js"></script>
 </body>
 
 </html>

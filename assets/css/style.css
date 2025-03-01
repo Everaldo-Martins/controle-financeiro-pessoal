@@ -385,13 +385,25 @@ main .resume .resume-container i {
 main .resume .resume-container .incomes,
 main .resume .resume-container .expenses,
 main .resume .resume-container .total,
-main .resume .resume-container .major {
+main .resume .resume-container .balance {
   width: fit-content;
   color: var(--foreground);
   font-size: 1.8rem;
   font-weight: 700;
   text-align: left;
 }
+
+main .filter {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 10px;
+}
+
+main .filter select {
+  min-width: 90px;
+}                                                           
 
 main .container-table {
   width: 100%;
@@ -837,7 +849,7 @@ header .logo {
   main .resume .resume-container .incomes,
   main .resume .resume-container .expenses,
   main .resume .resume-container .total,
-  main .resume .resume-container .major {
+  main .resume .resume-container .balance {
     font-size: 1.4rem;
   }
 }

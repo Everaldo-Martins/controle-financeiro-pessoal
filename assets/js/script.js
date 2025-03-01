@@ -8,250 +8,327 @@ const addItem = document.querySelector('.add-item');
 const incomes = document.querySelector(".incomes");
 const expenses = document.querySelector(".expenses");
 const total = document.querySelector(".total");
-const major = document.querySelector(".major");
+const balance = document.querySelector(".balance");
 
 let editDesc = document.getElementById("editDesc");
 let editAmount = document.getElementById("editAmount");
 let editType = document.getElementById("editType");
 
-let items;
+let items = [];
 let editIndex;
 
-document.getElementById('copy').innerHTML = `&#9400; CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;
+// Função para gerar a lista de anos (de 2025 até o ano atual)
+function generateYearOptions() {
+    const yearSelect = document.getElementById("year");
+    const currentYear = new Date().getFullYear();
 
-const modalNewItem = () => {
-  document.querySelector('.add-modal').classList.toggle('visible');
+    yearSelect.innerHTML = "";
+    for (let year = 2025; year <= currentYear; year++) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    }
+    yearSelect.value = currentYear;
 }
 
-addItem.addEventListener('click', () => {
-  modalNewItem();
+// Função para obter o mês atual em português
+function getCurrentMonth() {
+    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+    return monthNames[new Date().getMonth()];
+}
+
+// Função para inicializar mês e ano
+function initializeMonthAndYear() {
+    let monthElement = document.getElementById("month");
+    let yearElement = document.getElementById("year");
+
+    let month = monthElement.value || getCurrentMonth();
+    let year = yearElement.value || new Date().getFullYear();
+
+    monthElement.value = month;
+    yearElement.value = year;
+
+    return { month, year };
+}
+
+// Gera as opções de anos ao carregar a página
+generateYearOptions();
+
+// Inicializa mês e ano
+let { month, year } = initializeMonthAndYear();
+
+document.getElementById("month").addEventListener('change', function () {
+    month = this.value;
+    loadItens(year, month);
 });
 
+document.getElementById("year").addEventListener('change', function () {
+    year = this.value;
+    loadItens(year, month);
+});
+
+document.getElementById("copy").innerHTML = `Ⓒ CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;
+
+const modalNewItem = () => {
+    document.querySelector('.add-modal').classList.toggle('visible');
+}
+
+if (addItem) {
+    addItem.addEventListener('click', () => {
+        modalNewItem();
+    });
+}
+
 document.querySelector(".close").onclick = function () {
-  modalNewItem();
+    modalNewItem();
 };
 
 btnNew.onclick = () => {
-  if (descItem.value === "" || amount.value === "" || type.value === "") {
-    return newToast('error', 'Preencha todos os campos.');
-  }
+    if (descItem.value === "" || amount.value === "" || type.value === "") {
+        return newToast('error', 'Preencha todos os campos.');
+    }
 
-  const initialLength = items.length;
+    const initialLength = items.length;
 
-  items.push({
-    pago: false,
-    desc: descItem.value,
-    amount: Math.abs(amount.value).toFixed(2),
-    type: type.value,    
-  });
+    items.push({
+        type: type.value,
+        description: descItem.value,
+        amount: Number(Math.abs(amount.value)).toFixed(2),
+        pago: false
+    });
 
-  setItensBD();
+    const sts = setItensBD(year, month);
+    loadItens(year, month);
 
-  loadItens();
+    descItem.value = "";
+    amount.value = "";
 
-  descItem.value = "";
-  amount.value = "";
-
-  if (items.length > initialLength) {
-    setTimeout(() => {
-      modalNewItem();
-    }, 1000);
-    newToast('success', 'Item adicionado com sucesso.');
-  }
+    if (items.length > initialLength) {
+        setTimeout(() => {
+            modalNewItem();
+        }, 1000);
+        newToast('success', 'Item adicionado com sucesso.');
+    }
 };
 
 document.getElementById("closeModal").onclick = function () {
-  document.querySelector(".edit-modal").classList.toggle('visible');
+    document.querySelector(".edit-modal").classList.toggle('visible');
 };
 
 function editItem(index) {
-  editIndex = index;
+    editIndex = index;
 
-  const item = items[index];
-  const typeEntrace = document.querySelector(".edit-modal-content-switch");
+    const item = items[index];
+    const typeEntrace = document.querySelector(".edit-modal-content-switch");
 
-  editDesc.value = item.desc;
-  editAmount.value = item.amount;
-  editType.value = item.type;
-  document.getElementById("editPago").checked = item.pago ?? false;
+    editDesc.value = item.description; // Corrigido de desc para description
+    editAmount.value = item.amount;
+    editType.value = item.type;
+    document.getElementById("editPago").checked = item.pago ?? false;
 
-  item.type === "entrada" ? typeEntrace.classList.add("hidden") : typeEntrace.classList.remove("hidden");
+    typeEntrace.classList.toggle("hidden", item.type === "entrada");
 
-  document.querySelector(".edit-modal").classList.toggle('visible');
+    document.querySelector(".edit-modal").classList.toggle('visible');
 }
 
 function saveEdit() {
-  items[editIndex].pago = document.getElementById("editPago").checked;
-  items[editIndex].desc = editDesc.value;
-  items[editIndex].amount = Number(editAmount.value);
-  items[editIndex].type = editType.value;  
+    items[editIndex].pago = document.getElementById("editPago").checked;
+    items[editIndex].description = editDesc.value;
+    items[editIndex].amount = Number(editAmount.value).toFixed(2);
+    items[editIndex].type = editType.value;
 
-  const sts = setItensBD();
-  loadItens();
+    const sts = setItensBD(year, month);
+    loadItens(year, month);
 
-  document.querySelector(".edit-modal").classList.toggle('visible');
-  newToast(sts ? 'success' : 'error', sts ? 'Item editado com sucesso.' : 'Erro ao editar o item.');
+    document.querySelector(".edit-modal").classList.toggle('visible');
+    newToast(sts ? 'success' : 'error', sts ? 'Item editado com sucesso.' : 'Erro ao editar o item.');
 }
 
 function insertItem(item, index) {
-  const items = getItensBD();
-  const tbody = document.querySelector("tbody");
+    const formattedAmount = Number(item.amount).toFixed(2);
+    const tr = document.createElement("tr");
 
-  // Formatar o valor
-  const formattedAmount = Number(item.amount).toFixed(2);
+    tr.innerHTML = `
+        <td class="columnType">${item.type === "entrada"
+            ? '<i class="fa-solid fa-circle-up" title="Entradas"></i>'
+            : '<i class="fa-solid fa-circle-down" title="Saídas"></i>'
+        }</td>
+        <td>${item.description}</td>
+        <td>R$ ${formattedAmount}</td>
+        <td class="columnType">${item.type !== "entrada"
+            ? item.pago
+                ? '<i class="fa-solid fa-check-circle" title="Pago"></i>'
+                : '<i class="fa-solid fa-circle" title="Não pago"></i>'
+            : '<i class="fa-solid fa-circle-exclamation" title="Tipo Entrada"></i>'
+        }</td>    
+        <td class="columnAction">
+            <button onclick="editItem(${index})" title="Editar">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+        </td>
+        <td class="columnAction">
+            <button onclick="deleteItem(${index})" title="Excluir">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </td>
+    `;
 
-  // Criar uma nova linha
-  const tr = document.createElement("tr");
-
-  tr.innerHTML = `
-    <td class="columnType">${item.type === "entrada"
-      ? '<i class="fa-solid fa-circle-up" title="Entradas"></i>'
-      : '<i class="fa-solid fa-circle-down" title="Saídas"></i>'
-    }</td>
-    <td>${item.desc}</td>
-    <td>R$ ${formattedAmount}</td>
-    <td class="columnType">${item.type !== "entrada" 
-      ? item.pago 
-        ? '<i class="fa-solid fa-check-circle" title="Pago"></i>' 
-        : '<i class="fa-solid fa-circle" title="Não pago"></i>'
-      : '<i class="fa-solid fa-circle-exclamation" title="Tipo Entrada"></i>'
-    }</td>    
-    <td class="columnAction">
-      <button onclick="editItem(${index})" title="Editar">
-        <i class="fa-solid fa-pen-to-square"></i>
-      </button>
-    </td>
-    <td class="columnAction">
-      <button onclick="deleteItem(${index})" title="Excluir">
-        <i class="fa-solid fa-trash-can"></i>
-      </button>
-    </td>
-  `;
-
-  // Inserir a nova linha antes da linha fixa de "Adicionar Item"
-  const addItemRow = tbody.querySelector("tr.item");
-  tbody.insertBefore(tr, addItemRow);
+    tbody.appendChild(tr); // Simplificado, removendo addItemRow desnecessário
 }
 
-function loadItens() {
-  items = getItensBD();
-  tbody.innerHTML = "";
-  items.forEach((item, index) => {
-    insertItem(item, index);
-  });
-
-  getTotals();
+function loadItens(year, month) {
+    items = getItensBD(year, month);
+    tbody.innerHTML = "";
+    items.forEach((item, index) => {
+        insertItem(item, index);
+    });
+    
+    getTotals(year, month);   
 }
 
-function getTotals() {
-  const amountIncomes = items
-    .filter((item) => item.type === "entrada")
-    .map((transaction) => Number(transaction.amount));
+function getTotals(year, month) {
+    const amountIncomes = items
+        .filter((item) => item.type === "entrada")
+        .map((transaction) => Number(transaction.amount));
 
-  const amountExpenses = items
-    .filter((item) => item.type === "saida")
-    .map((transaction) => Number(transaction.amount));
+    const amountExpenses = items
+        .filter((item) => item.type === "saida")
+        .map((transaction) => Number(transaction.amount));
 
-  const totalIncomes = amountIncomes
-    .reduce((acc, cur) => acc + cur, 0)
-    .toFixed(2);
+    const totalIncomes = amountIncomes
+        .reduce((acc, cur) => acc + cur, 0)
+        .toFixed(2);
 
-  const totalExpenses = Math.abs(
-    amountExpenses.reduce((acc, cur) => acc + cur, 0)
-  ).toFixed(2);
+    const totalExpenses = amountExpenses
+        .reduce((acc, cur) => acc + cur, 0)
+        .toFixed(2);
 
-  const totalItems = (totalIncomes - totalExpenses).toFixed(2);
+    const totalItems = (totalIncomes - totalExpenses).toFixed(2);
+    
+    const data = JSON.parse(localStorage.getItem(`db_items_${year}`)) || {
+        year: year,
+        active_month: month,
+        balance: 0,
+        months: {}
+    };
 
-  const incomesMaxValue = Math.max(
-    ...items
-      .filter((item) => item.type === "entrada")
-      .map((transaction) => Number(transaction.amount)), 0
-  ).toFixed(2);
+    const amountBalance = Number(data.balance) || 0.00;
 
-  incomes.innerHTML = totalIncomes;
-  expenses.innerHTML = totalExpenses;
-  total.innerHTML = totalItems;
-  major.innerHTML = incomesMaxValue;
-
+    incomes.innerHTML = totalIncomes;
+    expenses.innerHTML = totalExpenses;
+    total.innerHTML = totalItems;
+    balance.innerText = amountBalance.toFixed(2);
 }
 
-const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
+const getItensBD = (year, month) => {
+    const data = JSON.parse(localStorage.getItem(`db_items_${year}`)) || {
+        year: year,
+        active_month: month,
+        balance: 0,
+        months: {}
+    };
 
-const setItensBD = () => {
-  try {
-    localStorage.setItem("db_items", JSON.stringify(items));
-    return true;
-  }
-  catch (error) {
-    console.error("Erro ao salvar no localStorage:", error);
-    return false;
-  }
+    if (!data.months[month]) {
+        data.months[month] = { itens: [] };
+        localStorage.setItem(`db_items_${year}`, JSON.stringify(data));
+    }
+
+    return data.months[month].itens || [];
+};
+
+const setItensBD = (year, month) => {
+    try {
+        const data = JSON.parse(localStorage.getItem(`db_items_${year}`)) || {
+            year: year,
+            active_month: month,
+            balance: 0,
+            months: {}
+        };
+
+        data.months[month] = data.months[month] || { itens: [] };
+        data.months[month].itens = items;
+
+        data.balance = Object.values(data.months).reduce((acc, monthData) => {
+            return acc + monthData.itens.reduce((monthAcc, item) => {
+                return item.type === "entrada" 
+                    ? monthAcc + Number(item.amount)
+                    : monthAcc - Number(item.amount);
+            }, 0);
+        }, 0);
+
+        localStorage.setItem(`db_items_${year}`, JSON.stringify(data));
+        return true;
+    } catch (error) {
+        console.error("Erro ao salvar no localStorage:", error);
+        return false;
+    }
 };
 
 let itemIndexToDelete = null;
-
 const deleteModal = document.querySelector('.delete-modal');
+
 function deleteItem(index) {
-  itemIndexToDelete = index;
-  deleteModal.classList.toggle('active');
+    itemIndexToDelete = index;
+    deleteModal.classList.toggle('active');
 }
 
 document.querySelector('.confirm').addEventListener('click', function () {
-  if (itemIndexToDelete !== null) {
-    items.splice(itemIndexToDelete, 1);
-
-    const sts = setItensBD();
-    loadItens();
-
-    newToast(sts ? 'success' : 'error', sts ? 'Item removido com sucesso.' : 'Erro ao remover o item.');
-    itemIndexToDelete = null;
-  }
-  deleteModal.classList.toggle('active');
+    if (itemIndexToDelete !== null) {
+        items.splice(itemIndexToDelete, 1);
+        const sts = setItensBD(year, month);
+        loadItens(year, month);
+        newToast(sts ? 'success' : 'error', sts ? 'Item removido com sucesso.' : 'Erro ao remover o item.');
+        itemIndexToDelete = null;
+    }
+    deleteModal.classList.toggle('active');
 });
 
 document.querySelector('.cancel').addEventListener('click', function () {
-  itemIndexToDelete = null;
-  deleteModal.classList.toggle('active');
+    itemIndexToDelete = null;
+    deleteModal.classList.toggle('active');
 });
 
-loadItens();
-
 function newToast(sts, message) {
-  let main = document.querySelector('main');
+    let main = document.querySelector('main');
+    let existingToast = main.querySelector('.toast');
+    if (existingToast) existingToast.remove();
 
-  let existingToast = main.querySelector('.toast');
-  if (existingToast) existingToast.remove();
+    let toast = document.createElement('div');
+    let fa = document.createElement('span');
+    let msg = document.createElement('span');
 
-  let toast = document.createElement('div');
-  let fa = document.createElement('span');
-  let msg = document.createElement('span');
+    toast.classList.add('toast');
+    fa.classList.add('fa-solid');
+    msg.classList.add('msg');
 
-  toast.classList.add('toast');
-  fa.classList.add('fa-solid');
-  msg.classList.add('msg');
+    fa.classList.add(sts === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation');
+    msg.innerText = message;
 
-  fa.classList.add(sts === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation');
-  msg.innerText = message;
+    toast.appendChild(fa);
+    toast.appendChild(msg);
+    main.appendChild(toast);
 
-  main.appendChild(toast);
-  toast.appendChild(fa);
-  toast.appendChild(msg);
-
-  setTimeout(() => {
-    toast.classList.add(sts);
     setTimeout(() => {
-      toast.classList.remove(sts);
-      toast.remove();
-    }, 10000);
-  }, 300);
+        toast.classList.add(sts);
+        setTimeout(() => {
+            toast.classList.remove(sts);
+            toast.remove();
+        }, 10000);
+    }, 300);
 }
 
 window.onclick = function (event) {
-  if (event.target.classList.contains("edit-modal")) {
-    document.querySelector(".edit-modal").classList.toggle('visible');    
-  }
-
-  if(event.target.classList.contains("add-modal")){
-    document.querySelector('.add-modal').classList.toggle('visible');
-  }
+    if (event.target.classList.contains("edit-modal")) {
+        document.querySelector(".edit-modal").classList.toggle('visible');
+    }
+    if (event.target.classList.contains("add-modal")) {
+        document.querySelector('.add-modal').classList.toggle('visible');
+    }
+    if (event.target.classList.contains("delete-modal")) {
+        document.querySelector('.delete-modal').classList.toggle('active');
+    }
 };
+
+// Carrega os itens iniciais
+loadItens(year, month);
