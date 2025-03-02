@@ -17,7 +17,6 @@ let editType = document.getElementById("editType");
 let items = [];
 let editIndex;
 
-// Função para gerar a lista de anos (de 2025 até o ano atual)
 function generateYearOptions() {
     const yearSelect = document.getElementById("year");
     const currentYear = new Date().getFullYear();
@@ -32,13 +31,11 @@ function generateYearOptions() {
     yearSelect.value = currentYear;
 }
 
-// Função para obter o mês atual em português
 function getCurrentMonth() {
     const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
     return monthNames[new Date().getMonth()];
 }
 
-// Função para inicializar mês e ano
 function initializeMonthAndYear() {
     let monthElement = document.getElementById("month");
     let yearElement = document.getElementById("year");
@@ -52,10 +49,8 @@ function initializeMonthAndYear() {
     return { month, year };
 }
 
-// Gera as opções de anos ao carregar a página
 generateYearOptions();
 
-// Inicializa mês e ano
 let { month, year } = initializeMonthAndYear();
 
 document.getElementById("month").addEventListener('change', function () {
@@ -174,7 +169,7 @@ function insertItem(item, index) {
         </td>
     `;
 
-    tbody.appendChild(tr); // Simplificado, removendo addItemRow desnecessário
+    tbody.appendChild(tr);
 }
 
 function loadItens(year, month) {
@@ -330,5 +325,4 @@ window.onclick = function (event) {
     }
 };
 
-// Carrega os itens iniciais
 loadItens(year, month);
