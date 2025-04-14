@@ -753,6 +753,198 @@ main .delete-modal .modal-content .confirm i {
   vertical-align: middle;
 } 
 
+/* Compras */
+
+.shopping-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.controls select,
+.controls button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.controls button.add-item {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.controls button.add-item:hover {
+  background-color: #218838;
+}
+
+.lists {
+  display: flex;
+  gap: 20px;
+}
+
+.category {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.category h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.category table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.columnAction button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.columnAction button:hover {
+  color: #007bff;
+}
+
+/* Estilos dos modais */
+.add-modal,
+.edit-modal,
+.delete-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.add-modal.visible,
+.edit-modal.visible,
+.delete-modal.active {
+  display: block;
+}
+
+.add-modal-content,
+.edit-modal-content,
+.delete-modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.close,
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.add-modal-content input,
+.add-modal-content select,
+.edit-modal-content input,
+.edit-modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-modal-content button,
+.edit-modal-content button,
+.delete-modal-content button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-modal-content button,
+.edit-modal-content button {
+  background-color: #28a745;
+  color: white;
+}
+
+.add-modal-content button:hover,
+.edit-modal-content button:hover {
+  background-color: #218838;
+}
+
+.delete-modal-content .confirm {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-modal-content .confirm:hover {
+  background-color: #c82333;
+}
+
+.delete-modal-content .cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.delete-modal-content .cancel:hover {
+  background-color: #5a6268;
+}
+
+/* Estilo do toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.toast.success {
+  background-color: #28a745;
+  opacity: 1;
+}
+
+.toast.error {
+  background-color: #dc3545;
+  opacity: 1;
+}
+
+.toast .fa-solid {
+  font-size: 18px;
+}
+
 footer {
   width: 100%;
   height: 40px;
