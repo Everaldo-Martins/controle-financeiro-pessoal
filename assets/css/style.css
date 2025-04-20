@@ -1027,9 +1027,9 @@ footer span {
 	}
 
 	header nav a,
-  header nav a:hover {
-		font-size: 0.8rem;
-    font-weight: 600;
+  	header nav a:hover {
+		font-size: 3.2vw;
+    	font-weight: 600;
 		padding: 10px;
 	}
 
