@@ -1,0 +1,1 @@
+document.querySelector('.copy').innerHTML = `Ⓒ Finance - ${new Date().getFullYear()} - Todos os direitos reservados.`;

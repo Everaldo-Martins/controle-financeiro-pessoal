@@ -1,21 +1,42 @@
-const tbody = document.querySelector("tbody");
-const descItem = document.querySelector("#desc");
-const amount = document.querySelector("#amount");
-const type = document.querySelector("#type");
-const btnNew = document.querySelector("#btnNew");
-const addItem = document.querySelector('.add-item');
+// ==============================
+// Atribuições
+// ==============================
 
-const incomes = document.querySelector(".incomes");
-const expenses = document.querySelector(".expenses");
-const total = document.querySelector(".total");
-const balance = document.querySelector(".balance");
+// Elementos da tabela e formulário principal
+const tbody = document.querySelector("tbody"),
+      descItem = document.querySelector("#desc"),
+      amount = document.querySelector("#amount"),
+      type = document.querySelector("#type"),
+      btnNew = document.querySelector("#btnNew"),
+      addItem = document.querySelector('.add-item'),
 
-let editDesc = document.getElementById("editDesc");
-let editAmount = document.getElementById("editAmount");
-let editType = document.getElementById("editType");
+// Elementos de totais e saldo
+      incomes = document.querySelector(".incomes"),
+      expenses = document.querySelector(".expenses"),
+      total = document.querySelector(".total"),
+      balance = document.querySelector(".balance"),
 
-let items = [];
-let editIndex;
+// Modal de confirmação de exclusão
+      deleteModal = document.querySelector('.delete-modal');
+
+// Elementos do formulário de edição
+let editDesc = document.getElementById("editDesc"),
+    editAmount = document.getElementById("editAmount"),
+    editType = document.getElementById("editType"),
+
+// Variáveis de controle
+    items = [],
+    editIndex,
+    itemIndexToDelete = null;
+
+// ==============================
+// Funções auxiliares
+// ==============================
+
+function getCurrentMonth() {
+    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+    return monthNames[new Date().getMonth()];
+}
 
 function generateYearOptions() {
     const yearSelect = document.getElementById("year");
@@ -31,11 +52,6 @@ function generateYearOptions() {
     yearSelect.value = currentYear;
 }
 
-function getCurrentMonth() {
-    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-    return monthNames[new Date().getMonth()];
-}
-
 function initializeMonthAndYear() {
     let monthElement = document.getElementById("month");
     let yearElement = document.getElementById("year");
@@ -49,172 +65,46 @@ function initializeMonthAndYear() {
     return { month, year };
 }
 
-generateYearOptions();
+function newToast(sts, message) {
+    let main = document.querySelector('main');
+    let existingToast = main.querySelector('.toast');
+    if (existingToast) existingToast.remove();
 
-let { month, year } = initializeMonthAndYear();
+    let toast = document.createElement('div');
+    let fa = document.createElement('span');
+    let msg = document.createElement('span');
 
-document.getElementById("month").addEventListener('change', function () {
-    month = this.value;
-    loadItens(year, month);
-});
+    toast.classList.add('toast');
+    fa.classList.add('fa-solid');
+    msg.classList.add('msg');
 
-document.getElementById("year").addEventListener('change', function () {
-    year = this.value;
-    loadItens(year, month);
-});
+    fa.classList.add(sts === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation');
+    msg.innerText = message;
 
-document.getElementById("copy").innerHTML = `Ⓒ CFP - Controle Financeiro Pessoal - ${new Date().getFullYear()} - Todos os direitos reservados.`;
+    toast.appendChild(fa);
+    toast.appendChild(msg);
+    main.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add(sts);
+        setTimeout(() => {
+            toast.classList.remove(sts);
+            toast.remove();
+        }, 10000);
+    }, 300);
+}
+
+// ==============================
+// Funções de modais
+// ==============================
 
 const modalNewItem = () => {
     document.querySelector('.add-modal').classList.toggle('visible');
-}
-
-if (addItem) {
-    addItem.addEventListener('click', () => {
-        modalNewItem();
-    });
-}
-
-document.querySelector(".close").onclick = function () {
-    modalNewItem();
 };
 
-btnNew.onclick = () => {
-    if (descItem.value === "" || amount.value === "" || type.value === "") {
-        return newToast('error', 'Preencha todos os campos.');
-    }
-
-    const initialLength = items.length;
-
-    items.push({
-        type: type.value,
-        description: descItem.value,
-        amount: Number(Math.abs(amount.value)).toFixed(2),
-        pago: false
-    });
-
-    const sts = setItensBD(year, month);
-    loadItens(year, month);
-
-    descItem.value = "";
-    amount.value = "";
-
-    if (items.length > initialLength) {
-        setTimeout(() => {
-            modalNewItem();
-        }, 1000);
-        newToast('success', 'Item adicionado com sucesso.');
-    }
-};
-
-document.getElementById("closeModal").onclick = function () {
-    document.querySelector(".edit-modal").classList.toggle('visible');
-};
-
-function editItem(index) {
-    editIndex = index;
-
-    const item = items[index];
-    const typeEntrace = document.querySelector(".edit-modal-content-switch");
-
-    editDesc.value = item.description; // Corrigido de desc para description
-    editAmount.value = item.amount;
-    editType.value = item.type;
-    document.getElementById("editPago").checked = item.pago ?? false;
-
-    typeEntrace.classList.toggle("hidden", item.type === "entrada");
-
-    document.querySelector(".edit-modal").classList.toggle('visible');
-}
-
-function saveEdit() {
-    items[editIndex].pago = document.getElementById("editPago").checked;
-    items[editIndex].description = editDesc.value;
-    items[editIndex].amount = Number(editAmount.value).toFixed(2);
-    items[editIndex].type = editType.value;
-
-    const sts = setItensBD(year, month);
-    loadItens(year, month);
-
-    document.querySelector(".edit-modal").classList.toggle('visible');
-    newToast(sts ? 'success' : 'error', sts ? 'Item editado com sucesso.' : 'Erro ao editar o item.');
-}
-
-function insertItem(item, index) {
-    const formattedAmount = Number(item.amount).toFixed(2);
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-        <td class="columnType">${item.type === "entrada"
-            ? '<i class="fa-solid fa-circle-up" title="Entradas"></i>'
-            : '<i class="fa-solid fa-circle-down" title="Saídas"></i>'
-        }</td>
-        <td>${item.description}</td>
-        <td>R$ ${formattedAmount}</td>
-        <td class="columnType">${item.type !== "entrada"
-            ? item.pago
-                ? '<i class="fa-solid fa-check-circle" title="Pago"></i>'
-                : '<i class="fa-solid fa-circle" title="Não pago"></i>'
-            : '<i class="fa-solid fa-circle-exclamation" title="Tipo Entrada"></i>'
-        }</td>    
-        <td class="columnAction">
-            <button onclick="editItem(${index})" title="Editar">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-        </td>
-        <td class="columnAction">
-            <button onclick="deleteItem(${index})" title="Excluir">
-                <i class="fa-solid fa-trash-can"></i>
-            </button>
-        </td>
-    `;
-
-    tbody.appendChild(tr);
-}
-
-function loadItens(year, month) {
-    items = getItensBD(year, month);
-    tbody.innerHTML = "";
-    items.forEach((item, index) => {
-        insertItem(item, index);
-    });
-    
-    getTotals(year, month);   
-}
-
-function getTotals(year, month) {
-    const amountIncomes = items
-        .filter((item) => item.type === "entrada")
-        .map((transaction) => Number(transaction.amount));
-
-    const amountExpenses = items
-        .filter((item) => item.type === "saida")
-        .map((transaction) => Number(transaction.amount));
-
-    const totalIncomes = amountIncomes
-        .reduce((acc, cur) => acc + cur, 0)
-        .toFixed(2);
-
-    const totalExpenses = amountExpenses
-        .reduce((acc, cur) => acc + cur, 0)
-        .toFixed(2);
-
-    const totalItems = (totalIncomes - totalExpenses).toFixed(2);
-    
-    const data = JSON.parse(localStorage.getItem(`db_items_${year}`)) || {
-        year: year,
-        active_month: month,
-        balance: 0,
-        months: {}
-    };
-
-    const amountBalance = Number(data.balance) || 0.00;
-
-    incomes.innerHTML = totalIncomes;
-    expenses.innerHTML = totalExpenses;
-    total.innerHTML = totalItems;
-    balance.innerText = amountBalance.toFixed(2);
-}
+// ==============================
+// Banco de Dados (localStorage)
+// ==============================
 
 const getItensBD = (year, month) => {
     const data = JSON.parse(localStorage.getItem(`db_items_${year}`)) || {
@@ -260,13 +150,163 @@ const setItensBD = (year, month) => {
     }
 };
 
-let itemIndexToDelete = null;
-const deleteModal = document.querySelector('.delete-modal');
+// ==============================
+// Funções principais
+// ==============================
+
+function insertItem(item, index) {
+    const formattedAmount = Number(item.amount).toFixed(2);
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td class="columnType">${item.type === "entrada"
+            ? '<i class="fa-solid fa-circle-up" title="Entradas"></i>'
+            : '<i class="fa-solid fa-circle-down" title="Saídas"></i>'
+        }</td>
+        <td>${item.description}</td>
+        <td>R$ ${formattedAmount}</td>
+        <td class="columnType">${item.type !== "entrada"
+            ? item.pago
+                ? '<i class="fa-solid fa-check-circle" title="Pago"></i>'
+                : '<i class="fa-solid fa-circle" title="Não pago"></i>'
+            : '<i class="fa-solid fa-circle-exclamation" title="Tipo Entrada"></i>'
+        }</td>    
+        <td class="columnAction">
+            <button onclick="editItem(${index})" title="Editar">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+        </td>
+        <td class="columnAction">
+            <button onclick="deleteItem(${index})" title="Excluir">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </td>
+    `;
+
+    tbody.appendChild(tr);
+}
+
+function loadItens(year, month) {
+    items = getItensBD(year, month);
+    tbody.innerHTML = "";
+    items.forEach((item, index) => insertItem(item, index));
+    getTotals(year, month);   
+}
+
+function getTotals(year, month) {
+    const amountIncomes = items
+        .filter((item) => item.type === "entrada")
+        .map((transaction) => Number(transaction.amount));
+
+    const amountExpenses = items
+        .filter((item) => item.type === "saida")
+        .map((transaction) => Number(transaction.amount));
+
+    const totalIncomes = amountIncomes.reduce((acc, cur) => acc + cur, 0).toFixed(2);
+    const totalExpenses = amountExpenses.reduce((acc, cur) => acc + cur, 0).toFixed(2);
+    const totalItems = (totalIncomes - totalExpenses).toFixed(2);
+
+    const data = JSON.parse(localStorage.getItem(`db_items_${year}`)) || {
+        year: year,
+        active_month: month,
+        balance: 0,
+        months: {}
+    };
+
+    const amountBalance = Number(data.balance) || 0.00;
+
+    incomes.innerHTML = totalIncomes;
+    expenses.innerHTML = totalExpenses;
+    total.innerHTML = totalItems;
+    balance.innerText = amountBalance.toFixed(2);
+}
+
+function editItem(index) {
+    editIndex = index;
+
+    const item = items[index];
+    const typeEntrace = document.querySelector(".edit-modal-content-switch");
+
+    editDesc.value = item.description;
+    editAmount.value = item.amount;
+    editType.value = item.type;
+    document.getElementById("editPago").checked = item.pago ?? false;
+
+    typeEntrace.classList.toggle("hidden", item.type === "entrada");
+
+    document.querySelector(".edit-modal").classList.toggle('visible');
+}
+
+function saveEdit() {
+    items[editIndex].pago = document.getElementById("editPago").checked;
+    items[editIndex].description = editDesc.value;
+    items[editIndex].amount = Number(editAmount.value).toFixed(2);
+    items[editIndex].type = editType.value;
+
+    const sts = setItensBD(year, month);
+    loadItens(year, month);
+
+    document.querySelector(".edit-modal").classList.toggle('visible');
+    newToast(sts ? 'success' : 'error', sts ? 'Item editado com sucesso.' : 'Erro ao editar o item.');
+}
 
 function deleteItem(index) {
     itemIndexToDelete = index;
     deleteModal.classList.toggle('active');
 }
+
+// ==============================
+// Eventos
+// ==============================
+
+generateYearOptions();
+let { month, year } = initializeMonthAndYear();
+
+document.getElementById("month").addEventListener('change', function () {
+    month = this.value;
+    loadItens(year, month);
+});
+
+document.getElementById("year").addEventListener('change', function () {
+    year = this.value;
+    loadItens(year, month);
+});
+
+if (addItem) {
+    addItem.addEventListener('click', modalNewItem);
+}
+
+document.querySelector(".close").onclick = modalNewItem;
+
+btnNew.onclick = () => {
+    if (descItem.value === "" || amount.value === "" || type.value === "") {
+        return newToast('error', 'Preencha todos os campos.');
+    }
+
+    const initialLength = items.length;
+
+    items.push({
+        type: type.value,
+        description: descItem.value,
+        amount: Number(Math.abs(amount.value)).toFixed(2),
+        pago: false
+    });
+
+    const sts = setItensBD(year, month);
+    loadItens(year, month);
+
+    descItem.value = "";
+    amount.value = "";
+
+    if (items.length > initialLength) {
+        setTimeout(modalNewItem, 1000);
+        newToast('success', 'Item adicionado com sucesso.');
+    }
+};
+
+document.getElementById("closeModal").onclick = () => {
+    document.querySelector(".edit-modal").classList.toggle('visible');
+};
 
 document.querySelector('.confirm').addEventListener('click', function () {
     if (itemIndexToDelete !== null) {
@@ -284,35 +324,6 @@ document.querySelector('.cancel').addEventListener('click', function () {
     deleteModal.classList.toggle('active');
 });
 
-function newToast(sts, message) {
-    let main = document.querySelector('main');
-    let existingToast = main.querySelector('.toast');
-    if (existingToast) existingToast.remove();
-
-    let toast = document.createElement('div');
-    let fa = document.createElement('span');
-    let msg = document.createElement('span');
-
-    toast.classList.add('toast');
-    fa.classList.add('fa-solid');
-    msg.classList.add('msg');
-
-    fa.classList.add(sts === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation');
-    msg.innerText = message;
-
-    toast.appendChild(fa);
-    toast.appendChild(msg);
-    main.appendChild(toast);
-
-    setTimeout(() => {
-        toast.classList.add(sts);
-        setTimeout(() => {
-            toast.classList.remove(sts);
-            toast.remove();
-        }, 10000);
-    }, 300);
-}
-
 window.onclick = function (event) {
     if (event.target.classList.contains("edit-modal")) {
         document.querySelector(".edit-modal").classList.toggle('visible');
@@ -324,5 +335,9 @@ window.onclick = function (event) {
         document.querySelector('.delete-modal').classList.toggle('active');
     }
 };
+
+// ==============================
+// Inicialização
+// ==============================
 
 loadItens(year, month);

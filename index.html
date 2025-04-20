@@ -4,8 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sistam Financeiro Pessoal</title>
+	<title>Fiance</title>
 	<link rel="stylesheet" href="./assets/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
 </head>
 
 <body>
@@ -17,19 +22,19 @@
 				<line x1="12" y1="20" x2="12" y2="4" />
 				<line x1="6" y1="20" x2="6" y2="14" />
 			</svg>
-			CFP
+			<span class="logotxt">Finance</span>
 		</a>
 		<nav>
 			<a href="./" class="home">
-				<i class="fa-solid fa-home"></i>
-				Home
+				<i class="fa-solid fa-money-bill-trend-up"></i>
+				Fiananças
 			</a>
-			<a href="./about.html" class="about">
-				<i class="fa-solid fa-circle-exclamation"></i>
-				Sobre
+			<a href="./my-purchases.html" class="my-purchases">
+				<i class="fa-solid fa-cart-shopping"></i>
+				Compras
 			</a>
 			<a href="./contact.html" class="contact">
-				<i class="fa-solid fa-location-dot"></i>
+				<i class="fa-solid fa-address-book"></i>
 				Contato
 			</a>
 		</nav>
@@ -37,35 +42,34 @@
 	<main>
 		<div class="resume">
 			<div class="resume-container">
-				<i class="fa-solid fa-circle-up"></i>
+				<i class="fa-regular fa-circle-up"></i>
 				<div>
 					<span>Entadas:</span>
 					<h3>R$ <span class="incomes">0.00</span></h3>
 				</div>
 			</div>
 			<div class="resume-container">
-				<i class="fa-solid fa-circle-down"></i>
+				<i class="fa-regular fa-circle-down"></i>
 				<div>
 					<span>Saídas:</span>
 					<h3>R$ <span class="expenses">0.00</span></h3>
 				</div>
 			</div>
 			<div class="resume-container">
-				<i class="fa-solid fa-hand-holding-dollar"></i>
+				<i class="fa-solid fa-sack-dollar"></i>
 				<div>
-					<span>Saldo:</span>
+					<span>Saldo Mẽs:</span>
 					<h3>R$ <span class="total">0.00</span></h3>
 				</div>
 			</div>
 			<div class="resume-container">
-				<i class="fa-solid fa-sack-dollar"></i>
+				<i class="fa-solid fa-piggy-bank"></i>
 				<div>
-					<span>S. Anterior:</span>
+					<span>Saldo Ano:</span>
 					<h3>R$ <span class="balance">0.00</span></h3>
 				</div>
 			</div>
 		</div>
-
 		<div class="filter">
 			<label for="month">Mês:</label>
 			<select id="month">
@@ -83,11 +87,9 @@
 				<option value="novembro">Novembro</option>
 				<option value="dezembro">Dezembro</option>
 			</select>
-
 			<label for="year">Ano:</label>
 			<select id="year"></select>
 		</div>
-
 		<div class="container-table">
 			<table>
 				<thead>
@@ -102,27 +104,22 @@
 				<tbody>
 				</tbody>
 			</table>
-
 			<div class="add-item" title="Adicionar Item">
-				<i class="fa-solid fa-circle-plus"></i>
+				<i class="fa-solid fa-square-plus"></i>
 				<span>Adicionar Item</span>
 			</div>
-
 			<div class="add-modal">
 				<div class="add-modal-container">
 					<div class="add-modal-content">
 						<h3>Adicionar Novo Item</h3>
 						<i class="close fa-solid fa-circle-xmark"></i>
 					</div>
-
 					<div class="desc">
 						<input type="text" id="desc" placeholder="Descrição" />
 					</div>
-
 					<div class="amount">
 						<input type="number" id="amount" placeholder="Valor" />
 					</div>
-
 					<div class="type">
 						<select id="type">
 							<option value="">Tipo</option>
@@ -130,31 +127,26 @@
 							<option value="saida">Saída</option>
 						</select>
 					</div>
-
 					<button id="btnNew" class="submit">
 						<i class="fa-solid fa-circle-check"></i>
 						Salvar
 					</button>
 				</div>
 			</div>
-
 			<div class="edit-modal">
 				<div class="edit-modal-container">
 					<div class="edit-modal-content">
 						<i id="closeModal" class="fa-solid fa-circle-xmark"></i>
 						<h3>Editar Item</h3>
 					</div>
-
 					<div class="edit-modal-content">
 						<label for="editDesc">Descrição:</label>
 						<input type="text" id="editDesc" />
 					</div>
-
 					<div class="edit-modal-content">
 						<label for="editAmount">Valor:</label>
 						<input type="number" id="editAmount" />
 					</div>
-
 					<div class="edit-modal-content">
 						<label for="editType">Tipo:</label>
 						<select id="editType">
@@ -162,7 +154,6 @@
 							<option value="saida">Saída</option>
 						</select>
 					</div>
-
 					<div class="edit-modal-content-switch">
 						<label for="editPago">Pago:</label>
 						<label class="switch">
@@ -170,14 +161,12 @@
 							<span class="slider round"></span>
 						</label>
 					</div>
-
 					<button class="submit" onclick="saveEdit()">
 						<i class="fa-solid fa-circle-check"></i>
 						Salvar
 					</button>
 				</div>
 			</div>
-
 			<div class="delete-modal">
 				<div class="modal-content">
 					<p>Quer realmente deletar esse item?</p>
@@ -195,9 +184,10 @@
 			</div>
 	</main>
 	<footer>
-		<span id="copy"></span>
+		<span class="copy"></span>
 	</footer>
 	<script src="./assets/js/script.js"></script>
+	<script src="./assets/js/extra.js"></script>
 </body>
 
 </html>
