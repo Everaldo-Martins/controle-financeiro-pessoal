@@ -797,8 +797,6 @@ main .delete-modal .modal-content .confirm i {
 
 .category {
   flex: 1;
-  background-color: #f9f9f9;
-  padding: 15px;
   border-radius: 5px;
 }
 
@@ -851,9 +849,7 @@ main .delete-modal .modal-content .confirm i {
 .add-modal-content,
 .edit-modal-content,
 .delete-modal-content {
-  background-color: white;
-  margin: 15% auto;
-  padding: 20px;
+  padding: 0;
   border-radius: 5px;
   width: 90%;
   max-width: 400px;
@@ -869,22 +865,10 @@ main .delete-modal .modal-content .confirm i {
   cursor: pointer;
 }
 
-.add-modal-content input,
-.add-modal-content select,
-.edit-modal-content input,
-.edit-modal-content select {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
 .add-modal-content button,
 .edit-modal-content button,
 .delete-modal-content button {
   padding: 10px;
-  margin: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
